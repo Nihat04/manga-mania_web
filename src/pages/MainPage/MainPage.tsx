@@ -22,8 +22,8 @@ const MainPage = () => {
                     POPULAR
                 </h2>
                 <ul className={styles['section__list']}>
-                    {test.map((el) => (
-                        <li className={'section__item'}>
+                    {test.map((el, index) => (
+                        <li key={index} className={'section__item'}>
                             <Link to="/">
                                 <img
                                     className={styles['section__item__img']}

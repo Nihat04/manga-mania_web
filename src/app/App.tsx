@@ -4,6 +4,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from '../widgets/ui/Header/Header';
 import MainPage from '../pages/MainPage/MainPage';
+import CatalogPage from '../pages/CatalogPage/CatalogPage';
+import CartPage from '../pages/CartPage/CartPage';
 
 type route = {
     path: string;
@@ -11,7 +13,11 @@ type route = {
 };
 
 function App() {
-    const publicRoutes: route[] = [{ path: '/', element: <MainPage /> }];
+    const publicRoutes: route[] = [
+        { path: '/', element: <MainPage /> },
+        { path: '/catalog', element: <CatalogPage /> },
+        { path: '/cart', element: <CartPage /> },
+    ];
 
     return (
         <>

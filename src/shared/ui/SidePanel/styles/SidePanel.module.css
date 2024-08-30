@@ -1,0 +1,75 @@
+.side-panel {
+    position: fixed;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.side-panel--open {
+    display: flex;
+}
+
+.panel {
+    background-color: #B9B6B6;
+    width: 72%;
+    height: 100%;
+}
+
+.close-area {
+    width: 28%;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 30px 20px;
+    width: 100%;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: #A1A1A1;
+}
+
+.list {
+    display: flex;
+    padding-left: 20px;
+    flex-direction: column;
+    list-style: none;
+    gap: 20px;
+}
+
+/* item */
+
+.item__name {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Range Item */
+
+.range__input {
+    padding: 0 10px;
+    max-width: 72px;
+    min-height: 30px;
+    border-radius: 30px;
+}
+
+/* Options Item */
+
+.options__list {
+    list-style: none;
+}
+
+.options__item:not(:nth-last-child()) {
+    margin-bottom: 10px;
+}
+
+.options__checkbox {
+    margin-right: 10px;
+    width: 25px;
+    aspect-ratio: 1;
+}

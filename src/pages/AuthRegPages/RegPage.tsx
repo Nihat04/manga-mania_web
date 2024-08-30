@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const RegPage = () => {
-  return (
-    <div>RegPage</div>
-  )
-}
+    return <div>RegPage</div>;
+};
 
-export default RegPage
+export default RegPage;
