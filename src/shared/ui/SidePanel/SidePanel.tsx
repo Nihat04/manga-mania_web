@@ -11,8 +11,8 @@ export enum OptionType {
     link,
 }
 
-const SidePanel = () => {
-    const [open, setOpen] = useState(true);
+const SidePanel = (props: { open: boolean; setOpen }) => {
+    const { open, setOpen } = props;
 
     return (
         <div
