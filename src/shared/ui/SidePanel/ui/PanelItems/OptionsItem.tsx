@@ -20,7 +20,11 @@ const OptionsItem = (props: { name: string; options: string[] }) => {
             >
                 {name}
             </p>
-            <ul className={styles['options__list']}>
+            <ul
+                className={classNames(styles['options__list'], {
+                    [styles['options__list-invisible']]: !open,
+                })}
+            >
                 {options.map((option, index) => (
                     <li key={index} className={styles['options__item']}>
                         <input

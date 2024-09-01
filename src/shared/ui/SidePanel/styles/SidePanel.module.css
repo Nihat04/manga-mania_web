@@ -4,14 +4,17 @@
     width: 100vw;
     height: 100vh;
     top: 0;
-    left: 0;
+    left: -100%;
     z-index: 1000;
-    animation: close 150ms linear forwards;
 }
 
 .side-panel--open {
     display: flex;
     animation: open 150ms linear forwards;
+}
+
+.side-panel--close {
+    animation: close 150ms linear forwards;
 }
 
 .panel {
@@ -66,6 +69,8 @@
 .item__dropdown {
     position: relative;
     padding-right: 25px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .item__dropdown::after {
@@ -75,20 +80,25 @@
     width: 16px;
     aspect-ratio: 1;
     right: 0;
-    top: 25%;
+    top: 20%;
     background-image: url('../../../assets/svg/arrow-down.svg');
     background-repeat: no-repeat;
     background-position: right center;
-    rotate: 90deg;
+    transform: rotate(90deg);
+    transition: all 150ms linear;
 }
 
 .item__dropdown--open::after {
-    content: '';
-    rotate: 0;
+    transform: rotate(0deg);
+    transition: all 150ms linear;
 }
 
 .options__list {
     list-style: none;
+}
+
+.options__list-invisible {
+    display: none;
 }
 
 .options__item {
@@ -127,8 +137,6 @@
     background-repeat: no-repeat;
     background-position: center center;
 }
-
-.options__checkbox--checked {}
 
 /* animations */
 

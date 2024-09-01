@@ -14,6 +14,10 @@ export enum OptionType {
 const SidePanel = (props: { open: boolean; setOpen }) => {
     const { open, setOpen } = props;
 
+    const closePanel = (e: React.MouseEvent<HTMLElement>) => {
+        setOpen(false);
+    };
+
     return (
         <div
             className={classNames(styles['side-panel'], {
@@ -34,7 +38,7 @@ const SidePanel = (props: { open: boolean; setOpen }) => {
             </div>
             <div
                 className={styles['close-area']}
-                onClick={() => setOpen(false)}
+                onClick={(e) => closePanel(e)}
             ></div>
         </div>
     );
