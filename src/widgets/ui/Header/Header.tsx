@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import menuIcon from './svg/menu.svg';
 import favoriteIcon from '../../../shared/assets/svg/favorite.svg';
-import cartIcon from './svg/cart.svg';
+import cartIcon from '../../../shared/assets/svg/cart.svg';
 import profileIcon from './svg/profile.svg';
 
 type navLink = {
