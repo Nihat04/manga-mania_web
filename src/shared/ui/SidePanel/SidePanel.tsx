@@ -1,22 +1,39 @@
 import styles from './styles/SidePanel.module.css';
+import './styles/body.css';
 
-import RangeItem from './ui/PanelItems/RangeItem';
-import OptionsItem from './ui/PanelItems/OptionsItem';
-import { useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
+
 import classNames from 'classnames';
 
-export enum OptionType {
-    range,
-    options,
-    link,
-}
+const SidePanel = ({
+    btnRef,
+    title,
+    children,
+}: {
+    btnRef: React.RefObject<HTMLButtonElement>;
+    title: string;
+    children: ReactElement;
+}) => {
+    const [open, setOpen] = useState(false);
 
-const SidePanel = (props: { open: boolean; setOpen }) => {
-    const { open, setOpen } = props;
+    const changeOpen = (state: boolean) => {
+        setOpen(state);
 
-    const closePanel = (e: React.MouseEvent<HTMLElement>) => {
-        setOpen(false);
+        if (state) {
+            document.body.classList.add('body--blocked');
+        } else {
+            document.body.classList.remove('body--blocked');
+        }
     };
+
+    useEffect(() => {
+        if (btnRef.current != null) {
+            btnRef.current.addEventListener('click', () => {
+                changeOpen(!open);
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [btnRef]);
 
     return (
         <div
@@ -26,19 +43,13 @@ const SidePanel = (props: { open: boolean; setOpen }) => {
         >
             <div className={styles['panel']}>
                 <div className={styles['header']}>
-                    <p>Фильтры</p>
+                    <p>{title}</p>
                 </div>
-                <ul className={styles['list']}>
-                    <RangeItem name="цена" range={{ start: 50, end: 2000 }} />
-                    <OptionsItem
-                        name="возраст"
-                        options={['18+', '16+', '12+']}
-                    />
-                </ul>
+                <div className={styles['body']}>{children}</div>
             </div>
             <div
                 className={styles['close-area']}
-                onClick={(e) => closePanel(e)}
+                onClick={() => changeOpen(false)}
             ></div>
         </div>
     );

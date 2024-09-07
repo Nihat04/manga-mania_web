@@ -1,7 +1,5 @@
 import styles from './styles/CatalogPage.module.css';
 
-import { Link } from 'react-router-dom';
-
 import testImg1 from '../../../public/img/test/100023311367b0 1.png';
 import testImg2 from '../../../public/img/test/85-0 1.png';
 import testImg3 from '../../../public/img/test/VQ3PhZxoKBrPnv82upnTPynbpCi0TJPrTP7EBxDt 1.png';

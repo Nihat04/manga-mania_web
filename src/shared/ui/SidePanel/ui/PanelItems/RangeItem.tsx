@@ -1,10 +1,18 @@
+import { useState } from 'react';
 import styles from '../../styles/SidePanel.module.css';
 
-const RangeItem = (props: {
+const RangeItem = ({
+    name,
+    range,
+}: {
     name: string;
     range: { start: number; end: number };
 }) => {
-    const { name, range } = props;
+    const [currentRange, setCurrentRange] = useState({ ...range });
+
+    const setRange = (propertyName: string, value: number) => {
+        setCurrentRange({ ...currentRange, [propertyName]: value });
+    };
 
     return (
         <li className={styles['item']}>
@@ -14,15 +22,19 @@ const RangeItem = (props: {
                 <input
                     className={styles['range__input']}
                     type="number"
-                    min={range.start}
-                    value={range.start}
+                    name="start"
+                    min={currentRange.start}
+                    value={currentRange.start}
+                    onChange={(e) => setRange(e.target.name, e.target.value)}
                 />{' '}
                 до{' '}
                 <input
                     className={styles['range__input']}
                     type="number"
-                    max={range.end}
-                    value={range.end}
+                    name="end"
+                    max={currentRange.end}
+                    value={currentRange.end}
+                    onChange={(e) => setRange(e.target.name, e.target.value)}
                 />
             </p>
         </li>

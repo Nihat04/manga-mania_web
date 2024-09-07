@@ -22,7 +22,7 @@ const OptionsItem = (props: { name: string; options: string[] }) => {
             </p>
             <ul
                 className={classNames(styles['options__list'], {
-                    [styles['options__list-invisible']]: !open,
+                    [styles['options__list-visible']]: open,
                 })}
             >
                 {options.map((option, index) => (

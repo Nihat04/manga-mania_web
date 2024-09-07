@@ -1,0 +1,30 @@
+.carousel {
+    padding: 28px 0 66px 0;
+    transition: all 50ms linear;
+    background-position: 0 top;
+}
+
+.control-dots {
+    display: flex;
+    padding: 9px 23px !important;
+    width: auto !important;
+    background-color: #B9B6B6;
+    left: 50%;
+    bottom: 15px !important;
+    border-radius: 10px;
+    gap: 23px;
+    transform: translateX(-50%);
+}
+
+.dot {
+    margin: 0 !important;
+    width: 6px !important;
+    height: 6px !important;
+    background: #5C5B5B !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.dot .selected {
+    background: #000 !important;
+}
