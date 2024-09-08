@@ -1,0 +1,38 @@
+.product {
+    position: relative;
+    padding: 10px 30px;
+    width: 100%;
+}
+
+.img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.favorite-btn {
+    position: absolute;
+    display: flex;
+    padding-top: 6px;
+    width: 35px;
+    height: 35px;
+    top: 11px;
+    right: 19px;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 100%;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+    width: 25px;
+}
+
+.name {
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.price {
+    font-size: 15px;
+    font-weight: 600;
+}

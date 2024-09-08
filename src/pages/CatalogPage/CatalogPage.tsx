@@ -6,7 +6,7 @@ import testImg3 from '../../../public/img/test/VQ3PhZxoKBrPnv82upnTPynbpCi0TJPrT
 import testImg4 from '../../../public/img/test/image 1.png';
 
 import Filters from '../../shared/ui/Filters/Filters';
-import ProductPanel from './ui/ProductPanel';
+import ProductPanel from '../../shared/ui/ProductPanel/ProductPanel';
 
 const test = [
     { id: 1, name: 'Тетрадь смерти', img: testImg1, price: 700 },
@@ -36,7 +36,9 @@ const CatalogPage = () => {
             <section className={styles['catalog-section']}>
                 <ul className={styles['catalog__list']}>
                     {test.map((el) => (
-                        <ProductPanel key={el.id} product={el} />
+                        <div className={styles['catalog__item']}>
+                            <ProductPanel key={el.id} product={el} />
+                        </div>
                     ))}
                 </ul>
             </section>

@@ -16,6 +16,7 @@
 }
 
 .categories__item--selected {
+    color: #000;
     font-weight: 800;
 }
 

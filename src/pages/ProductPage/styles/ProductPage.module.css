@@ -1,0 +1,25 @@
+.product {
+    margin: 0 10%;
+    margin-bottom: 17px;
+}
+
+.showcase {
+    margin-bottom: 20px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+}
+
+.properties {
+    padding: 35px 16px;
+    background-color: #D7D2D2;
+}
+
+.properties__list {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.properties__item button {
+    font-size: 16px;
+    font-weight: 600;
+}
