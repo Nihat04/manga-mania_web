@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import MenuSidePanel from '../../../shared/ui/SidePanel/MenuSidePanel';
+import SearchMenu from './ui/SearchMenu/SearchMenu';
 
 import menuIcon from './svg/menu.svg';
 import favoriteIcon from '../../../shared/assets/svg/favorite.svg';
@@ -19,7 +20,7 @@ type navLink = {
 };
 
 const NAV_LINKS: navLink[] = [
-    { label: 'избраное', icon: favoriteIcon, path: '/catalog' },
+    { label: 'избраное', icon: favoriteIcon, path: '/favorites' },
     { label: 'корзина', icon: cartIcon, path: '/cart' },
     { label: 'профиль', icon: profileIcon, path: '/profile' },
 ];
@@ -142,6 +143,13 @@ const Header = () => {
                 top={MENU.top}
                 bottom={MENU.bottom}
             />
+            <div
+                className={classNames(styles['search-menu'], {
+                    [styles['search-menu--visible']]: searchVisible,
+                })}
+            >
+                <SearchMenu visible={searchVisible} search={search} />
+            </div>
         </header>
     );
 };

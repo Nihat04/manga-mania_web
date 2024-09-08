@@ -1,10 +1,12 @@
 import styles from './styles/index.module.css';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './styles/carousel.css';
+
+import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 import SeriesCarousel from './ui/SeriesCarousel/SeriesCarousel';
-import { useSearchParams } from 'react-router-dom';
-import classNames from 'classnames';
+import GenreCarousel from './ui/GenreCarousel/GenreCarousel';
+import { getFeaturedGenres } from './api';
 
 type categoryType = {
     name: string;
@@ -13,7 +15,10 @@ type categoryType = {
 
 const MainPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const CATEGORIES: categoryType[] = [
+    const [featuredGenres, setFeaturedGenres] = useState([]);
+    const categoryParam = searchParams.get('category');
+
+    const categories: categoryType[] = [
         {
             name: 'popular',
             label: 'Популярное',
@@ -29,14 +34,18 @@ const MainPage = () => {
     ];
 
     const getCurrentCategory = (category: categoryType): boolean => {
-        return searchParams.get('category') === category.name;
+        return categoryParam === category.name;
     };
+
+    useEffect(() => {
+        getFeaturedGenres().then((res) => setFeaturedGenres(res));
+    }, []);
 
     return (
         <main className={styles['main']}>
             <section className={styles['categories']}>
                 <ul className={styles['categories__list']}>
-                    {CATEGORIES.map((el, index) => (
+                    {categories.map((el, index) => (
                         <li
                             className={classNames(styles['categories__item'], {
                                 [styles['categories__item--selected']]:
@@ -58,8 +67,18 @@ const MainPage = () => {
                     ))}
                 </ul>
             </section>
-            <section className={styles['series']}>
+            <section className={styles['featured-series']}>
                 <SeriesCarousel />
+            </section>
+            <section className={styles['featured-genres']}>
+                {featuredGenres.map((el) => (
+                    <GenreCarousel
+                        key={el.id}
+                        title={el.title}
+                        bgImage={el.img}
+                        products={el.products}
+                    />
+                ))}
             </section>
         </main>
     );

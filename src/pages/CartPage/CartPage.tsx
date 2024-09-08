@@ -1,13 +1,19 @@
 import styles from './styles/CartPage.module.css';
 
+import { useEffect, useState } from 'react';
+
+import { getCart } from './api/cartApi';
+
 import Filters from '../../shared/ui/Filters/Filters';
 import CartProduct from './ui/CartProduct';
 
-import img1 from '../../../public/img/test/85-0 1.png';
-
-const test = [{ img: img1, name: 'Токийские мстители', price: 700 }];
-
 const CartPage = () => {
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        getCart().then((res) => setCart(res));
+    }, []);
+
     return (
         <main>
             <section className={styles['filters-section']}>
@@ -15,7 +21,7 @@ const CartPage = () => {
             </section>
             <section className={styles['cart-section']}>
                 <ul className={styles['cart__list']}>
-                    {test.map((el, index) => (
+                    {cart.map((el, index) => (
                         <CartProduct key={index} product={el} />
                     ))}
                 </ul>

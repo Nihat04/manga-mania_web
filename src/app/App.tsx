@@ -7,6 +7,7 @@ import MainPage from '../pages/MainPage/MainPage';
 import CatalogPage from '../pages/CatalogPage/CatalogPage';
 import CartPage from '../pages/CartPage/CartPage';
 import ProductPage from '../pages/ProductPage/ProductPage';
+import FavoritesPage from '../pages/FavoritesPage/FavoritesPage';
 
 type route = {
     path: string;
@@ -19,6 +20,7 @@ function App() {
         { path: '/catalog', element: <CatalogPage /> },
         { path: '/cart', element: <CartPage /> },
         { path: '/product/:id', element: <ProductPage /> },
+        { path: '/favorites', element: <FavoritesPage /> },
     ];
 
     return (

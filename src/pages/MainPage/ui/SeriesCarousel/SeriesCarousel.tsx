@@ -1,101 +1,113 @@
 import styles from '../../styles/index.module.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import './styles/carousel.css';
 
 import { Carousel } from 'react-responsive-carousel';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import testImg1 from '../../../../../public/img/test/voley.png';
-import testImg2 from '../../../../../public/img/test/blue.png';
-import testImg3 from '../../../../../public/img/test/hori.png';
-
-const SERIES = [
-    {
-        caption: 'ВОЛЕЙБОЛ',
-        img: testImg1,
-        color: '#fca717',
-    },
-    {
-        caption: 'БЛЮ ЛОК',
-        img: testImg2,
-        color: '#018ac0',
-    },
-    {
-        caption: 'ХОРИМИЯ',
-        img: testImg3,
-        color: '#ECA1B1',
-    },
-];
+import { getFeaturedSeries } from '../../api';
 
 const SeriesCarousel = () => {
-    const updateColor = (index: number) => {
+    const [series, setSeries] = useState([]);
+    let bgPosition = 0;
+
+    const updateColor = (value: number) => {
+        if (value > 100) {
+            value = 100;
+        } else if (!value || value < 0) {
+            value = 0;
+        }
+
+        bgPosition = value;
+
         const carousel = document.querySelector('.carousel');
 
-        const animation = {
-            '0%': {
-                'background-position': '0 top',
-            },
-            '100%': {
-                'background-position': '50% top',
-            },
-        };
-
-        // carousel.style.backgroundPosition = `${calculateSectionPosition(index)}% top`;
-        carousel.animate(
+        carousel?.animate(
             [
-                { backgroundPosition: 0 },
-                { backgroundPosition: calculateSectionPosition(index) },
+                { backgroundPosition: `${bgPosition}% top` },
+                { backgroundPosition: `${value}% top` },
             ],
             {
-                duration: 3000,
-                iterations: 1,
+                duration: 500,
+                fill: 'forwards',
             }
         );
-        console.log(carousel.style.animation);
     };
 
-    useEffect(() => {
+    const styleListener = () => {
+        const observer = new MutationObserver((mutationList) => {
+            const transformValue = mutationList[0].target.style.transform;
+            const moveValue: string = transformValue
+                .split(',')[0]
+                .split('(')[1]
+                .replace('%', '');
+            const moveValueNumber = -Number(moveValue);
+            updateColor(moveValueNumber);
+        });
+
+        const slider = document.querySelector('.slider');
+        observer.observe(slider, {
+            attributes: true,
+            attributeFilter: ['style'],
+        });
+    };
+
+    const applyBackground = () => {
         const carousel = document.querySelector('.carousel');
 
         let gradientString = '';
 
-        for (let i = 0; i < SERIES.length; i++) {
-            gradientString += `, ${SERIES[i].color} ${calculateSectionSize(i)}%`;
+        for (let i = 0; i < series.length; i++) {
+            gradientString += `, ${series[i].color} ${calculateSectionSize(series, i)}%`;
         }
 
         carousel.style.backgroundImage = `linear-gradient(90deg${gradientString})`;
-        carousel.style.backgroundSize = `${SERIES.length * 90}% 100%`;
+        carousel.style.backgroundSize = `${series.length * 90}% 100%`;
+
+        styleListener();
+    };
+
+    useEffect(() => {
+        getFeaturedSeries().then((res) => setSeries(res));
     }, []);
 
-    const calculateSectionSize = (index: number) => {
-        const count = SERIES.length;
+    const calculateSectionSize = (series, index: number) => {
+        const count = series.length;
 
         return (100 / (count * 2)) * (1 + index * 2);
     };
 
     const calculateSectionPosition = (index: number) => {
-        const count = SERIES.length;
+        const count = series.length;
 
         return index * (100 / (count - 1));
     };
     return (
-        <Carousel
-            autoPlay={false}
-            infiniteLoop={false}
-            showArrows={false}
-            showThumbs={false}
-            showStatus={false}
-            centerMode={true}
-            centerSlidePercentage={80}
-            onChange={(index, e) => console.log(e)}
-        >
-            {SERIES.map((el, index) => (
-                <div key={index} className={styles['series__item']}>
-                    <img className={styles['series__item__img']} src={el.img} />
-                    <p className={styles['series__item__caption']}>
-                        {el.caption}
-                    </p>
-                </div>
-            ))}
-        </Carousel>
+        <>
+            <div onLoad={() => applyBackground()}>
+                <Carousel
+                    autoPlay={false}
+                    infiniteLoop={false}
+                    showArrows={false}
+                    showThumbs={false}
+                    showStatus={false}
+                    centerMode={true}
+                    centerSlidePercentage={70}
+                >
+                    {series.map((el, index) => (
+                        <div key={index} className={styles['series__item']}>
+                            <img
+                                className={styles['series__item__img']}
+                                src={el.img}
+                            />
+                            <p className={styles['series__item__caption']}>
+                                {el.caption}
+                            </p>
+                        </div>
+                    ))}
+                </Carousel>
+            </div>
+        </>
     );
 };
 

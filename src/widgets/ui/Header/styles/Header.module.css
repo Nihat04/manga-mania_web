@@ -138,6 +138,43 @@
     font-size: 1.2rem;
 }
 
+.search-menu {
+    position: absolute;
+    display: none;
+    width: 100dvw;
+    height: 100rch;
+    top: 100%;
+    z-index: 999;
+    animation: close 50ms linear forwards;
+}
+
+.search-menu--visible {
+    display: block;
+    animation: open 50ms linear forwards;
+}
+
+@keyframes open {
+    0% {
+        right: -100%;
+        display: none;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes close {
+    0% {
+        right: 0%;
+        display: block;
+    }
+    100% {
+        right: -100%;
+        display: none;
+    }
+}
+
+
 /* adaptive */
 
 @media screen and (min-width: 768px) {

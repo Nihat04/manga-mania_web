@@ -1,0 +1,31 @@
+.favorites {
+    background-color: #EDEAEA;
+}
+
+.favorites__list {
+    --row-items: 2;
+    --gap: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    list-style: none;
+}
+
+.favorites__item {
+    --border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 1px;
+    width: calc(
+        (100% - var(--gap) * (var(--row-items) - 1)) / var(--row-items) - 2px
+    );
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.favorites__item:nth-child(2n-1) {
+    border-right: var(--border);
+}
+
+.favorites__item:nth-child(-n + 2) {
+    border-top: var(--border);
+}

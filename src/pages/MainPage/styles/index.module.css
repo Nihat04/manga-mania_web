@@ -26,14 +26,8 @@
 
 /* series */
 
-.series__carousel {
-    padding: 28px 36px;
-    background: linear-gradient(
-        90deg,
-        #fca717 20.67%,
-        #018ac0 43.17%,
-        #eca1b1 83.67%
-    );
+.featured-series {
+    margin-bottom: 110px;
 }
 
 .series__item {
@@ -62,4 +56,12 @@
     bottom: 10%;
     text-shadow: 7px 9px 6px rgba(0, 0, 0, 0.58);
     transform: translate(-50%, -50%);
+}
+
+/* genres */
+
+.featured-genres {
+    display: flex;
+    flex-direction: column;
+    gap: 110px;
 }

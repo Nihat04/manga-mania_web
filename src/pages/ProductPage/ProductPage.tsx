@@ -1,38 +1,43 @@
 import styles from './styles/ProductPage.module.css';
 
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { getProduct } from './api/productApi';
+
 import Filters from '../../shared/ui/Filters/Filters';
 import ProductPanel from '../../shared/ui/ProductPanel/ProductPanel';
 
-import img1 from '../../../public/img/test/VQ3PhZxoKBrPnv82upnTPynbpCi0TJPrTP7EBxDt 1.png';
-
 const ProductPage = () => {
-    const product = {
-        id: 1,
-        name: 'Токийские мстители',
-        img: img1,
-        price: 700,
-    };
+    const { id } = useParams();
+    const [product, setProduct] = useState();
 
     const props = [
         {
-            label: 'Описание',
+            label: 'описание',
         },
         {
-            label: 'Характеристика',
+            label: 'характеристика',
         },
         {
-            label: 'Отзывы',
+            label: 'отзывы',
         },
     ];
+
+    useEffect(() => {
+        getProduct(id).then((res) => setProduct(res));
+    }, []);
 
     return (
         <main>
             <Filters title="Манга" />
             <section className={styles['product']}>
                 <div className={styles['showcase']}>
-                    <ProductPanel product={product} />
+                    {product && <ProductPanel product={product} />}
                 </div>
-                <div className="">Том 3</div>
+                <Link to="#" className={styles['product__episode']}>
+                    Том 3
+                </Link>
             </section>
             <section className={styles['properties']}>
                 <ul className={styles['properties__list']}>
