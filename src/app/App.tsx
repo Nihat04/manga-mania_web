@@ -6,6 +6,7 @@ import Header from '../widgets/ui/Header/Header';
 import MainPage from '../pages/MainPage/MainPage';
 import CatalogPage from '../pages/CatalogPage/CatalogPage';
 import CartPage from '../pages/CartPage/CartPage';
+import ProductPage from '../pages/ProductPage/ProductPage';
 
 type route = {
     path: string;
@@ -17,6 +18,7 @@ function App() {
         { path: '/', element: <MainPage /> },
         { path: '/catalog', element: <CatalogPage /> },
         { path: '/cart', element: <CartPage /> },
+        { path: '/product/:id', element: <ProductPage /> },
     ];
 
     return (
