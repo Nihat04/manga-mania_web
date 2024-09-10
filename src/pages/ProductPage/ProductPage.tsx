@@ -4,28 +4,60 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { getProduct } from './api/productApi';
+import manga from '../../entities/manga/model/mangaModel';
 
 import Filters from '../../shared/ui/Filters/Filters';
 import ProductPanel from '../../shared/ui/ProductPanel/ProductPanel';
 
+enum propTypes {
+    decription,
+    characterisitcs,
+    reviews,
+}
+
+type prop = {
+    title: string;
+    type: propTypes;
+};
+
+const PROPS: prop[] = [
+    {
+        title: 'описание',
+        type: propTypes.decription,
+    },
+    {
+        title: 'характеристика',
+        type: propTypes.characterisitcs,
+    },
+    {
+        title: 'отзывы',
+        type: propTypes.reviews,
+    },
+];
+
 const ProductPage = () => {
     const { id } = useParams();
-    const [product, setProduct] = useState();
+    const [product, setProduct] = useState<manga>();
+    const [currentProperty, setCurrentProperty] = useState<prop | null>(null);
 
-    const props = [
-        {
-            label: 'описание',
-        },
-        {
-            label: 'характеристика',
-        },
-        {
-            label: 'отзывы',
-        },
-    ];
+    const renderProperty = (currentProperty: prop) => {
+        switch (currentProperty.type) {
+            case propTypes.decription:
+                return <div>{product?.description}</div>;
+            case propTypes.characterisitcs:
+                return <div></div>;
+            case propTypes.reviews:
+                return <div></div>;
+            default:
+                return <div></div>;
+        }
+    };
 
     useEffect(() => {
-        getProduct(id).then((res) => setProduct(res));
+        if (id) {
+            getProduct(Number(id)).then((res) => setProduct(res));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -41,13 +73,15 @@ const ProductPage = () => {
             </section>
             <section className={styles['properties']}>
                 <ul className={styles['properties__list']}>
-                    {props.map((el, index) => (
+                    {PROPS.map((el, index) => (
                         <li key={index} className={styles['properties__item']}>
-                            <button>{el.label}</button>
+                            <button onClick={() => setCurrentProperty(el)}>
+                                {el.title}
+                            </button>
                         </li>
                     ))}
                 </ul>
-                <div className={styles['properties__displayed']}></div>
+                {currentProperty && renderProperty(currentProperty)}
             </section>
             <section className={styles['similar']}>
                 <ul className={styles['similar__list']}></ul>

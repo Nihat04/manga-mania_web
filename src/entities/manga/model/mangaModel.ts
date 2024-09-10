@@ -1,6 +1,7 @@
-type mange = {
-    id: 1;
+type manga = {
+    id: number;
     name: string;
+    imgUrl: string;
     weight: number;
     pagesNumber: number;
     releaseYear: number;
@@ -15,4 +16,4 @@ type mange = {
     discount: number;
 };
 
-export default mange;
+export default manga;

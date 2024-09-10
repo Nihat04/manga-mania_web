@@ -34,8 +34,6 @@ const GenreCarousel = ({
             attributes: true,
             attributeFilter: ['style'],
         });
-
-        console.log(slider);
     };
 
     const updatePosition = (position: number) => {
