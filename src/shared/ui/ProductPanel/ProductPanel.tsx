@@ -8,7 +8,7 @@ const ProductPanel = (props: { product: manga }) => {
 
     return (
         <div className={styles['product']}>
-            <img className={styles['img']} src={product.imgUrl} />
+            <img className={styles['img']} src={product.img} />
             <button className={styles['favorite-btn']}>
                 <img className={styles['icon']} src={favoriteIcon} />
             </button>
