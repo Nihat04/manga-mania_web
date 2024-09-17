@@ -1,0 +1,22 @@
+.tabs {
+    padding: 40px 20px;
+    background-color: #edeaea;
+}
+
+.tabs__list {
+    list-style: none;
+}
+
+.tabs__item:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+/* profile dropdown tab */
+
+.dropdown__btn {
+    padding-right: 32px;
+    font-size: 20px;
+    background-image: url('../../../shared/assets/svg/arrow-down.svg');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
