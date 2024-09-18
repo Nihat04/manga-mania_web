@@ -1,0 +1,13 @@
+/* series */
+
+.featured-series {
+    margin-bottom: 110px;
+}
+
+/* genres */
+
+.featured-genres {
+    display: flex;
+    flex-direction: column;
+    gap: 110px;
+}

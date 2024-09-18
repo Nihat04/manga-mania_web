@@ -9,6 +9,7 @@ import CartPage from '../pages/CartPage/CartPage';
 import ProductPage from '../pages/ProductPage/ProductPage';
 import FavoritesPage from '../pages/FavoritesPage/FavoritesPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
+import AuthPage from '../pages/AuthRegPages/AuthPage';
 
 type route = {
     path: string;
@@ -25,11 +26,24 @@ function App() {
         { path: '/profile', element: <ProfilePage /> },
     ];
 
+    const independentRoutes: route[] = [
+        { path: '/login', element: <AuthPage /> },
+    ];
+
     return (
         <>
-            <Header />
+            {!independentRoutes.some(
+                (route) => route.path === location.pathname
+            ) && <Header />}
             <Routes>
                 {publicRoutes.map((route, index) => (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        element={route.element}
+                    />
+                ))}
+                {independentRoutes.map((route, index) => (
                     <Route
                         key={index}
                         path={route.path}

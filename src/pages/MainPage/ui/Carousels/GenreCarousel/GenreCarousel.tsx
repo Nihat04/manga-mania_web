@@ -3,8 +3,11 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './styles/carouselFix.css';
 
 import { Carousel } from 'react-responsive-carousel';
-import ProductPanel from '../../../../shared/ui/ProductPanel/ProductPanel';
 import { useRef } from 'react';
+
+import manga from '../../../../../entities/manga/model/mangaModel';
+
+import ProductPanel from '../../../../../shared/ui/ProductPanel/ProductPanel';
 
 const GenreCarousel = ({
     title,
@@ -13,7 +16,7 @@ const GenreCarousel = ({
 }: {
     title: string;
     bgImage: string;
-    products: any;
+    products: manga[];
 }) => {
     const mainRef = useRef(null);
     let bgPosition = 0;
@@ -29,7 +32,7 @@ const GenreCarousel = ({
             updatePosition(moveValueNumber);
         });
 
-        const slider = mainRef.current.querySelector('.slider');
+        const slider = mainRef.current?.querySelector('.slider');
         observer.observe(slider, {
             attributes: true,
             attributeFilter: ['style'],
@@ -45,7 +48,7 @@ const GenreCarousel = ({
 
         bgPosition = position;
 
-        mainRef?.current.animate(
+        mainRef.current?.animate(
             [
                 { backgroundPosition: `${bgPosition}% top` },
                 { backgroundPosition: `${position}% top` },

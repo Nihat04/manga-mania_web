@@ -1,51 +1,50 @@
 import styles from './styles/index.module.css';
 
+import { ReactElement } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import SeriesCarousel from './ui/SeriesCarousel/SeriesCarousel';
-import GenreCarousel from './ui/GenreCarousel/GenreCarousel';
-import { getFeaturedGenres } from './api';
+import PopularCategory from './ui/Categories/PopularCategory/PopularCategory';
+import LatestReleasesCategory from './ui/Categories/LatestReleasesCategory/LatestReleasesCategory';
+import DiscountsCategory from './ui/Categories/DiscountsCategory/DiscountsCategory';
 
 type categoryType = {
     name: string;
     label: string;
+    body: ReactElement;
 };
+
+const CATEGORIES: categoryType[] = [
+    {
+        name: 'popular',
+        label: 'Популярное',
+        body: <PopularCategory />,
+    },
+    {
+        name: 'latestRelease',
+        label: 'Новинки',
+        body: <LatestReleasesCategory />,
+    },
+    {
+        name: 'discount',
+        label: 'Скидки',
+        body: <DiscountsCategory />,
+    },
+];
 
 const MainPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [featuredGenres, setFeaturedGenres] = useState([]);
     const categoryParam = searchParams.get('category');
-
-    const categories: categoryType[] = [
-        {
-            name: 'popular',
-            label: 'Популярное',
-        },
-        {
-            name: 'latestRelease',
-            label: 'Новинки',
-        },
-        {
-            name: 'discount',
-            label: 'Скидки',
-        },
-    ];
 
     const getCurrentCategory = (category: categoryType): boolean => {
         return categoryParam === category.name;
     };
 
-    useEffect(() => {
-        getFeaturedGenres().then((res) => setFeaturedGenres(res));
-    }, []);
-
     return (
         <main className={styles['main']}>
             <section className={styles['categories']}>
                 <ul className={styles['categories__list']}>
-                    {categories.map((el, index) => (
+                    {CATEGORIES.map((el, index) => (
                         <li
                             className={classNames(styles['categories__item'], {
                                 [styles['categories__item--selected']]:
@@ -67,18 +66,9 @@ const MainPage = () => {
                     ))}
                 </ul>
             </section>
-            <section className={styles['featured-series']}>
-                <SeriesCarousel />
-            </section>
-            <section className={styles['featured-genres']}>
-                {featuredGenres.map((el) => (
-                    <GenreCarousel
-                        key={el.id}
-                        title={el.title}
-                        bgImage={el.img}
-                        products={el.products}
-                    />
-                ))}
+            <section>
+                {CATEGORIES.find((category) => category.name === categoryParam)
+                    ?.body || <PopularCategory />}
             </section>
         </main>
     );

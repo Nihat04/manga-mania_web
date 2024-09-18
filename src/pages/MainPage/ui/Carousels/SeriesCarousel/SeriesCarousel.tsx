@@ -1,11 +1,11 @@
-import styles from '../../styles/index.module.css';
+import styles from './styles/SeriesCarousel.module.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './styles/carousel.css';
 
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect, useState } from 'react';
 
-import { getFeaturedSeries } from '../../api';
+import { getFeaturedSeries } from '../../../api';
 
 const SeriesCarousel = () => {
     const [series, setSeries] = useState([]);
@@ -77,16 +77,11 @@ const SeriesCarousel = () => {
         return (100 / (count * 2)) * (1 + index * 2);
     };
 
-    const calculateSectionPosition = (index: number) => {
-        const count = series.length;
-
-        return index * (100 / (count - 1));
-    };
     return (
         <>
             <div onLoad={() => applyBackground()}>
                 <Carousel
-                    autoPlay={false}
+                    autoPlay={true}
                     infiniteLoop={false}
                     showArrows={false}
                     showThumbs={false}

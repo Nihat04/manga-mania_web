@@ -1,18 +1,14 @@
 import styles from './styles/CartPage.module.css';
 
-import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { getCart } from './api/cartApi';
+import { RootState } from '../../store/store';
 
 import Filters from '../../shared/ui/Filters/Filters';
 import CartProduct from './ui/CartProduct';
 
 const CartPage = () => {
-    const [cart, setCart] = useState([]);
-
-    useEffect(() => {
-        getCart().then((res) => setCart(res));
-    }, []);
+    const cart = useSelector((state: RootState) => state.cart.cart);
 
     return (
         <main>
@@ -22,7 +18,7 @@ const CartPage = () => {
             <section className={styles['cart-section']}>
                 <ul className={styles['cart__list']}>
                     {cart.map((el, index) => (
-                        <CartProduct key={index} product={el} />
+                        <CartProduct key={index} cartProduct={el} />
                     ))}
                 </ul>
             </section>

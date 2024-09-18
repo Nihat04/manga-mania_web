@@ -1,28 +1,20 @@
-import testImg1 from '../../../../public/img/test/voley.png';
-import testImg2 from '../../../../public/img/test/blue.png';
-import testImg3 from '../../../../public/img/test/hori.png';
-import testImg4 from '../../../../public/img/test/svhool.png';
-import testImg5 from '../../../../public/img/test/dorogaUnost.png';
-import testImg6 from '../../../../public/img/test/poraUnost.png';
-import testImg7 from '../../../../public/img/test/dedUmer.png';
-import testImg8 from '../../../../public/img/test/Krokodil.png';
-import testImg9 from '../../../../public/img/test/pidorkiOnline.png';
+import manga from '../../../entities/manga/model/mangaModel';
 
 export async function getFeaturedSeries() {
     const test = [
         {
             caption: 'ВОЛЕЙБОЛ',
-            img: testImg1,
+            img: '/img/test/voley.png',
             color: '#fca717',
         },
         {
             caption: 'БЛЮ ЛОК',
-            img: testImg2,
+            img: '/img/test/blue.png',
             color: '#018ac0',
         },
         {
             caption: 'ХОРИМИЯ',
-            img: testImg3,
+            img: '/img/test/hori.png',
             color: '#ECA1B1',
         },
     ];
@@ -30,29 +22,36 @@ export async function getFeaturedSeries() {
     return test;
 }
 
-export async function getFeaturedGenres() {
+export async function getFeaturedGenres(): Promise<
+    {
+        id: number;
+        title: string;
+        bgImgUrl: string;
+        products: manga[];
+    }[]
+> {
     return [
         {
             id: 1,
             title: 'ШКОЛА',
-            img: testImg4,
+            bgImgUrl: '/img/test/svhool.png',
             products: [
                 {
                     id: 1,
                     name: 'Операция настоящая любовь',
-                    img: testImg6,
+                    imgUrl: '/img/manga/1/1_1.png',
                     price: 700,
                 },
                 {
                     id: 2,
                     name: 'Дорога юности',
-                    img: testImg5,
+                    imgUrl: '/img/manga/1/1_1.png',
                     price: 700,
                 },
                 {
                     id: 3,
                     name: 'Моя причина умереть',
-                    img: testImg7,
+                    imgUrl: '/img/manga/1/1_1.png',
                     price: 700,
                 },
             ],
@@ -60,24 +59,24 @@ export async function getFeaturedGenres() {
         {
             id: 2,
             title: 'СПОРТ',
-            img: testImg4,
+            bgImgUrl: '/img/test/svhool.png',
             products: [
                 {
                     id: 1,
                     name: 'Волейбол',
-                    img: testImg1,
+                    imgUrl: '/img/manga/1/1_1.png',
                     price: 700,
                 },
                 {
                     id: 2,
                     name: 'Баскетбол Куроко',
-                    img: testImg8,
+                    imgUrl: '/img/manga/1/1_1.png',
                     price: 700,
                 },
                 {
                     id: 3,
                     name: 'Вольный стиль',
-                    img: testImg9,
+                    imgUrl: '/img/manga/1/1_1.png',
                     price: 700,
                 },
             ],

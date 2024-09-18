@@ -1,4 +1,5 @@
-import img1 from '../../../../public/img/test/85-0 1.png';
 export async function getCart() {
-    return [{ img: img1, name: 'Токийские мстители', price: 700 }];
+    return [
+        { img: '/img/test/voley.png', name: 'Токийские мстители', price: 700 },
+    ];
 }

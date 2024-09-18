@@ -1,4 +1,4 @@
-import styles from '../../styles/ProfilePage.module.css'
+import styles from '../../styles/ProfilePage.module.css';
 
 import { ReactElement } from 'react';
 

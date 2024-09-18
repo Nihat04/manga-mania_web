@@ -52,17 +52,6 @@ const Header = () => {
         }, 50);
     };
 
-    // const search = (
-    //     e:
-    //         | React.KeyboardEvent<HTMLInputElement>
-    //         | React.ChangeEvent<HTMLInputElement>
-    // ) => {
-    //     if (!searchVisible) {
-    //         setSearchVisible(true);
-    //         return;
-    //     }
-    // };
-
     return (
         <header className={styles['header']}>
             <div
@@ -148,7 +137,7 @@ const Header = () => {
                     [styles['search-menu--visible']]: searchVisible,
                 })}
             >
-                <SearchMenu visible={searchVisible} search={search} />
+                <SearchMenu search={search} />
             </div>
         </header>
     );

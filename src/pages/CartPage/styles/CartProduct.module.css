@@ -37,7 +37,7 @@
     background-color: #f2efef;
 }
 
-.btn {
+.counter, .btn {
     font-size: 18px;
     font-weight: 700;
     background-color: #e0dbdb;
@@ -53,10 +53,9 @@
     background-position: calc(100% - 10px) center;
 }
 
-.btn__count {
+.counter__btn, .counter__number {
     display: inline-block;
-    width: 30px;
-    aspect-ratio: 1;
+    min-width: 35px;
     text-align: center;
     font-size: 24px;
     font-weight: 700;
