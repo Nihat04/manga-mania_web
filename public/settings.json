@@ -1,0 +1,16 @@
+{
+    "featuredGenres": [
+        {
+            "id": 1,
+            "title": "ШКОЛА",
+            "bgImgUrl": "/img/test/svhool.png",
+            "products": []
+        },
+        {
+            "id": 2,
+            "title": "СПОРТ",
+            "bgImgUrl": "/img/test/svhool.png",
+            "products": []
+        }
+    ]
+}

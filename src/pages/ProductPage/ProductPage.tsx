@@ -7,7 +7,7 @@ import { getProduct } from './api/productApi';
 import manga from '../../entities/manga/model/mangaModel';
 
 import Filters from '../../shared/ui/Filters/Filters';
-import ProductPanel from '../../shared/ui/ProductPanel/ProductPanel';
+import ProductPanel from './ui/ProductPanel/ProductPanel';
 
 enum propTypes {
     decription,
@@ -57,8 +57,7 @@ const ProductPage = () => {
         if (id) {
             getProduct(Number(id)).then((res) => setProduct(res));
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [id]);
 
     return (
         <main>

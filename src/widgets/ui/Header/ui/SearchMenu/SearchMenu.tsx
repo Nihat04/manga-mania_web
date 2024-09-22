@@ -1,26 +1,64 @@
 import '../../styles/Header.module.css';
 import styles from './styles/SearchMenu.module.css';
 
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { search as searchFunc } from './api/searchMenuApi';
+import { RootState } from '../../../../../store/store';
+import searchElement from '../../../../../store/search/model/searchModel';
+import {
+    addSearchHistory,
+    deleteSearchHistoryElement,
+    deleteSearchHistory,
+} from '../../../../../store/search/searchSlice';
 
-const SearchMenu = ({ search }: { search: string }) => {
+const SearchMenu = ({
+    searchString,
+    setSearchString,
+}: {
+    searchString: string;
+    setSearchString: Dispatch<SetStateAction<string>>;
+}) => {
+    const [searchResults, setSearchResults] = useState<searchElement[]>([]);
+    const navigate = useNavigate();
+    const searchHistory = useSelector(
+        (state: RootState) => state.search.history
+    );
+    const dispatch = useDispatch();
+
+    const goToProduct = (searchEl: searchElement) => {
+        navigate(`/product/${searchEl.id}`);
+        dispatch(addSearchHistory(searchEl));
+        setSearchString('');
+    };
+
+    useEffect(() => {
+        if (searchString) {
+            setSearchResults([]);
+            setTimeout(() => {
+                searchFunc(searchString).then((res) => setSearchResults(res));
+            }, 1000);
+        }
+    }, [searchString]);
+
     const render = () => {
-        if (search) {
+        if (searchString) {
             return (
                 <div>
                     <ul>
-                        <li className={styles['link-wrapper']}>
-                            <Link className={styles['link']} to="/">
-                                Токийский гуль
-                            </Link>
-                        </li>
-                        <li className={styles['link-wrapper']}>
-                            <Link className={styles['link']} to="/">
-                                Токийские мстители
-                            </Link>
-                        </li>
+                        {searchResults.map((el) => (
+                            <li key={el.id} className={styles['link-wrapper']}>
+                                <p
+                                    className={styles['link']}
+                                    onClick={() => goToProduct(el)}
+                                >
+                                    {el.name}
+                                </p>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             );
@@ -29,23 +67,39 @@ const SearchMenu = ({ search }: { search: string }) => {
                 <div className="">
                     <div className={styles['search-param']}>
                         <p className={styles['search-param__text']}>История</p>
-                        <button className={styles['search-param__btn']}>
+                        <button
+                            onClick={() => dispatch(deleteSearchHistory())}
+                            className={styles['search-param__btn']}
+                        >
                             очистить
                         </button>
                     </div>
                     <ul>
-                        <li className={styles['link-wrapper']}>
-                            <Link className={styles['link']} to="/">
-                                Токийский гуль
-                            </Link>
-                            <button className={styles['link__btn']}></button>
-                        </li>
-                        <li className={styles['link-wrapper']}>
-                            <Link className={styles['link']} to="/">
-                                Токийские мстители
-                            </Link>
-                            <button className={styles['link__btn']}></button>
-                        </li>
+                        {searchHistory.map((searchEl: searchElement) => (
+                            <li
+                                key={searchEl.id}
+                                className={styles['link-wrapper']}
+                            >
+                                <p
+                                    className={styles['p']}
+                                    onClick={() => {
+                                        goToProduct(searchEl);
+                                    }}
+                                >
+                                    {searchEl.name}
+                                </p>
+                                <button
+                                    className={styles['link__btn']}
+                                    onClick={() =>
+                                        dispatch(
+                                            deleteSearchHistoryElement(
+                                                searchEl.id
+                                            )
+                                        )
+                                    }
+                                ></button>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             );

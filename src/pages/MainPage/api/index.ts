@@ -1,4 +1,7 @@
-import manga from '../../../entities/manga/model/mangaModel';
+import axios from 'axios';
+import { ShortManga } from '../../../entities/manga/model/mangaModel';
+
+import axiosInstance from '../../../shared/api';
 
 export async function getFeaturedSeries() {
     const test = [
@@ -22,64 +25,26 @@ export async function getFeaturedSeries() {
     return test;
 }
 
-export async function getFeaturedGenres(): Promise<
-    {
-        id: number;
-        title: string;
-        bgImgUrl: string;
-        products: manga[];
-    }[]
-> {
-    return [
-        {
-            id: 1,
-            title: 'ШКОЛА',
-            bgImgUrl: '/img/test/svhool.png',
-            products: [
-                {
-                    id: 1,
-                    name: 'Операция настоящая любовь',
-                    imgUrl: '/img/manga/1/1_1.png',
-                    price: 700,
-                },
-                {
-                    id: 2,
-                    name: 'Дорога юности',
-                    imgUrl: '/img/manga/1/1_1.png',
-                    price: 700,
-                },
-                {
-                    id: 3,
-                    name: 'Моя причина умереть',
-                    imgUrl: '/img/manga/1/1_1.png',
-                    price: 700,
-                },
-            ],
-        },
-        {
-            id: 2,
-            title: 'СПОРТ',
-            bgImgUrl: '/img/test/svhool.png',
-            products: [
-                {
-                    id: 1,
-                    name: 'Волейбол',
-                    imgUrl: '/img/manga/1/1_1.png',
-                    price: 700,
-                },
-                {
-                    id: 2,
-                    name: 'Баскетбол Куроко',
-                    imgUrl: '/img/manga/1/1_1.png',
-                    price: 700,
-                },
-                {
-                    id: 3,
-                    name: 'Вольный стиль',
-                    imgUrl: '/img/manga/1/1_1.png',
-                    price: 700,
-                },
-            ],
-        },
-    ];
+export type genre = {
+    id: number;
+    title: string;
+    bgImgUrl: string;
+    products: ShortManga[];
+};
+
+export async function getFeaturedGenres(): Promise<genre[]> {
+    const featuredGenres: genre[] = await axios
+        .get('settings.json')
+        .then((res) => res.data)
+        .then((data) => data.featuredGenres);
+
+    for (let i = 0; i < featuredGenres.length; i++) {
+        const genre = featuredGenres[i];
+
+        genre.products = await axiosInstance
+            .get(`/manga/genre/${genre.title}`)
+            .then((res) => res.data);
+    }
+
+    return featuredGenres;
 }

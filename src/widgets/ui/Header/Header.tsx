@@ -27,7 +27,7 @@ const NAV_LINKS: navLink[] = [
 
 const MENU = {
     top: [
-        { label: 'Манга', link: '/' },
+        { label: 'Манга', link: '/catalog' },
         { label: 'Плакаты', link: '/' },
         { label: 'Брелки', link: '/' },
         { label: 'Мистери бокс', link: '/' },
@@ -137,7 +137,7 @@ const Header = () => {
                     [styles['search-menu--visible']]: searchVisible,
                 })}
             >
-                <SearchMenu search={search} />
+                <SearchMenu searchString={search} setSearchString={setSearch} />
             </div>
         </header>
     );

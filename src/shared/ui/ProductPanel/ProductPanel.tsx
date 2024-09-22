@@ -1,11 +1,14 @@
 import styles from './styles/ProductPanel.module.css';
 
 import favoriteIcon from '../../../shared/assets/svg/favorite.svg';
-import manga from '../../../entities/manga/model/mangaModel';
-import { useDispatch } from 'react-redux';
+import { ShortManga } from '../../../entities/manga/model/mangaModel';
 import { addProduct } from '../../../store/cart/cartSlice';
 
-const ProductPanel = ({ product }: { product: manga }) => {
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { BASE_URL } from '../../api';
+
+const ProductPanel = ({ product }: { product: ShortManga }) => {
     const dispatch = useDispatch();
 
     const addToCart = () => {
@@ -14,7 +17,12 @@ const ProductPanel = ({ product }: { product: manga }) => {
 
     return (
         <div className={styles['product']}>
-            <img className={styles['img']} src={product.imgUrl} />
+            <Link to={`/product/${product.id}`}>
+                <img
+                    className={styles['img']}
+                    src={ BASE_URL + product.imageUrl}
+                />
+            </Link>
             <button className={styles['favorite-btn']}>
                 <img className={styles['icon']} src={favoriteIcon} />
             </button>

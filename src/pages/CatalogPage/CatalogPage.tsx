@@ -3,12 +3,13 @@ import styles from './styles/CatalogPage.module.css';
 import { useEffect, useState } from 'react';
 
 import { getCatalog } from './api/catalogApi';
+import { ShortManga } from '../../entities/manga/model/mangaModel';
 
 import Filters from '../../shared/ui/Filters/Filters';
 import ProductPanel from '../../shared/ui/ProductPanel/ProductPanel';
 
 const CatalogPage = () => {
-    const [catalog, setCatalog] = useState([]);
+    const [catalog, setCatalog] = useState<ShortManga[]>([]);
 
     useEffect(() => {
         getCatalog().then((res) => setCatalog(res));
@@ -23,7 +24,7 @@ const CatalogPage = () => {
                 <ul className={styles['catalog__list']}>
                     {catalog.map((el) => (
                         <li key={el.id} className={styles['catalog__item']}>
-                            <ProductPanel key={el.id} product={el} />
+                            <ProductPanel product={el} />
                         </li>
                     ))}
                 </ul>

@@ -5,19 +5,11 @@ import './styles/carouselFix.css';
 import { Carousel } from 'react-responsive-carousel';
 import { useRef } from 'react';
 
-import manga from '../../../../../entities/manga/model/mangaModel';
+import { genre } from '../../../api';
 
 import ProductPanel from '../../../../../shared/ui/ProductPanel/ProductPanel';
 
-const GenreCarousel = ({
-    title,
-    bgImage,
-    products,
-}: {
-    title: string;
-    bgImage: string;
-    products: manga[];
-}) => {
+const GenreCarousel = ({ genre }: { genre: genre }) => {
     const mainRef = useRef(null);
     let bgPosition = 0;
 
@@ -63,11 +55,11 @@ const GenreCarousel = ({
     return (
         <div
             className={styles['carousel--wrapper']}
-            style={{ backgroundImage: `url(${bgImage})` }}
+            style={{ backgroundImage: `url(${genre.bgImgUrl})` }}
             onLoad={() => applyStyleListener()}
             ref={mainRef}
         >
-            <h2 className={styles['header']}>{title.toUpperCase()}</h2>
+            <h2 className={styles['header']}>{genre.title.toUpperCase()}</h2>
             <Carousel
                 autoPlay={false}
                 infiniteLoop={false}
@@ -78,9 +70,9 @@ const GenreCarousel = ({
                 centerSlidePercentage={70}
                 showIndicators={false}
             >
-                {products.map((el, index) => (
-                    <div key={index} className={styles['product']}>
-                        <ProductPanel key={index} product={el} />
+                {genre.products.map((product) => (
+                    <div key={product.id} className={styles['product']}>
+                        <ProductPanel product={product} />
                     </div>
                 ))}
             </Carousel>

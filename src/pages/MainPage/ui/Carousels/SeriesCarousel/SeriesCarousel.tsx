@@ -81,7 +81,7 @@ const SeriesCarousel = () => {
         <>
             <div onLoad={() => applyBackground()}>
                 <Carousel
-                    autoPlay={true}
+                    autoPlay={false}
                     infiniteLoop={false}
                     showArrows={false}
                     showThumbs={false}

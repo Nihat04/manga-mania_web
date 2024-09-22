@@ -36,22 +36,28 @@ const SidePanel = ({
     }, [btnRef]);
 
     return (
-        <div
-            className={classNames(styles['side-panel'], {
-                [styles['side-panel--open']]: open,
-            })}
-        >
-            <div className={styles['panel']}>
-                <div className={styles['header']}>
-                    <p>{title}</p>
-                </div>
-                <div className={styles['body']}>{children}</div>
-            </div>
+        <>
             <div
-                className={styles['close-area']}
-                onClick={() => changeOpen(false)}
-            ></div>
-        </div>
+                className={classNames(styles['side-panel'], {
+                    [styles['side-panel--open']]: open,
+                })}
+            >
+                <div
+                    className={classNames(styles['panel'], {
+                        [styles['panel--open']]: open,
+                    })}
+                >
+                    <div className={styles['header']}>
+                        <p>{title}</p>
+                    </div>
+                    <div className={styles['body']}>{children}</div>
+                </div>
+                <div
+                    className={styles['close-area']}
+                    onClick={() => changeOpen(false)}
+                ></div>
+            </div>
+        </>
     );
 };
 

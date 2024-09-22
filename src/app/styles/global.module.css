@@ -14,7 +14,7 @@
 
 body {
     margin: 0;
-    font-family: "inter", Arial, Helvetica, sans-serif;
+    font-family: 'inter', Arial, Helvetica, sans-serif;
 }
 
 main {
@@ -38,7 +38,7 @@ h6 {
 
 a {
     text-decoration: none;
-    color: #91BEF8;
+    color: #91bef8;
 }
 
 ul {
@@ -49,6 +49,7 @@ ul {
 button {
     margin: 0;
     padding: 0;
+    color: #000;
     background: none;
     border: none;
 }
@@ -56,5 +57,13 @@ button {
 input {
     margin: 0;
     padding: 0;
-    border: none
+    border: none;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
 }

@@ -1,6 +1,9 @@
 import styles from './styles/index.module.css';
 
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
+import { login } from './api/authApi';
 
 import loginLogo from './assets/svg/login.svg';
 
@@ -10,6 +13,12 @@ const AuthPage = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const navigate = useNavigate();
+    const authorize = (data: { email: string; password: string }) => {
+        login(data)
+            .then(() => navigate(-1))
+            .catch((err) => console.log(err));
+    };
 
     return (
         <main className={styles['main']}>
@@ -17,16 +26,21 @@ const AuthPage = () => {
                 <img className={styles['img']} src={loginLogo} />
                 <form
                     className={styles['form']}
-                    onSubmit={handleSubmit((data) => console.log(data))}
+                    onSubmit={handleSubmit(authorize)}
                 >
                     <input
                         className={styles['input']}
-                        {...register('firstName')}
-                        placeholder="Username"
+                        {...register('email', {
+                            required: 'enter an email',
+                        })}
+                        type="text"
+                        placeholder="Email"
                     />
                     <input
                         className={styles['input']}
-                        {...register('lastName', { required: true })}
+                        {...register('password', {
+                            required: 'enter an password',
+                        })}
                         type="password"
                         placeholder="Password"
                     />

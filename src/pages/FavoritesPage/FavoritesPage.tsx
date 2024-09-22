@@ -11,7 +11,7 @@ const FavoritesPage = () => {
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
-        getFavorites().then((res) => setFavorites(res));
+        getFavorites(1).then((res) => setFavorites(res));
     }, []);
 
     return (

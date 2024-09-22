@@ -1,7 +1,7 @@
 type manga = {
     id: number;
     name: string;
-    imgUrl: string;
+    imageUrls: string[];
     weight: number;
     pagesNumber: number;
     releaseYear: number;
@@ -15,5 +15,23 @@ type manga = {
     source: string;
     discount: number;
 };
+
+export type ShortManga = {
+    id: number;
+    name: string;
+    price: number;
+    rating: number;
+    imageUrl: string;
+};
+
+export function convertToShort(manga: manga): ShortManga {
+    return {
+        id: manga.id,
+        name: manga.name,
+        price: manga.price,
+        rating: manga.rating,
+        imageUrl: manga.imageUrls[0],
+    };
+}
 
 export default manga;

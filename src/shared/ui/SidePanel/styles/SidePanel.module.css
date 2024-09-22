@@ -10,12 +10,13 @@
     bottom: 0;
     left: -100%;
     z-index: 1000;
-    animation: close 150ms linear forwards;
+    animation: side-close 150ms linear forwards;
 }
 
 .side-panel--open {
     display: flex;
-    animation: open 150ms linear forwards;
+    animation: side-open 150ms linear forwards;
+    left: 0;
 }
 
 .panel {
@@ -23,6 +24,11 @@
     background-color: #b9b6b6;
     width: 72%;
     height: 100%;
+    animation: panel-close 150ms linear forwards;
+}
+
+.panel--open {
+    animation: panel-open 150ms linear forwards;
 }
 
 .close-area {
@@ -103,12 +109,12 @@
     background-image: url('../../../assets/svg/arrow-down.svg');
     background-repeat: no-repeat;
     background-position: right center;
-    transform: rotate(90deg);
+    transform: rotate(0deg);
     transition: all 50ms linear;
 }
 
 .item__dropdown--open::after {
-    transform: rotate(0deg);
+    transform: rotate(180deg);
     transition: all 50ms linear;
 }
 
@@ -206,9 +212,42 @@
     color: #000;
 }
 
+/* blur */
+
+.blur {
+    position: absolute;
+    width: 100vw;
+    height: 100dvh;
+}
+
 /* animations */
 
-@keyframes open {
+@keyframes side-open {
+    0% {
+        left: 0;
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.7);
+    }
+}
+
+@keyframes side-close {
+    0% {
+        display: block;
+        left: 0;
+    }
+    99% {
+        display: block;
+        left: 0;
+        background: none;
+    }
+    100% {
+        display: none;
+        left: -100%;
+    }
+}
+
+@keyframes panel-open {
     0% {
         left: -100%;
         display: none;
@@ -218,13 +257,13 @@
     }
 }
 
-@keyframes close {
+@keyframes panel-close {
     0% {
-        left: 0%;
         display: block;
+        left: 0%;
     }
     100% {
-        left: -100%;
         display: none;
+        left: -100%;
     }
 }

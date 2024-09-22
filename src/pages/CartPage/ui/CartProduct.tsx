@@ -4,6 +4,7 @@ import styles from '../styles/CartProduct.module.css';
 
 import classNames from 'classnames';
 import { deleteProduct, updateProduct } from '../../../store/cart/cartSlice';
+import { BASE_URL } from '../../../shared/api';
 
 const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
                 <div className={styles['product__left']}>
                     <img
                         className={styles['product__img']}
-                        src={cartProduct.product.imgUrl}
+                        src={BASE_URL + cartProduct.product.imageUrl}
                         alt=""
                     />
                 </div>

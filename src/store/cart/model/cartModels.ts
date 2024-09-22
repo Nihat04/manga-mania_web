@@ -1,7 +1,7 @@
-import manga from '../../../entities/manga/model/mangaModel';
+import { ShortManga } from '../../../entities/manga/model/mangaModel';
 
 type cartProduct = {
-    product: manga;
+    product: ShortManga;
     quantity: number;
 };
 

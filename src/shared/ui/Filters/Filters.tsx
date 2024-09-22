@@ -1,7 +1,6 @@
 import styles from './styles/Filters.module.css';
 
-import classNames from 'classnames';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import FilterType from '../SidePanel/model/FilterType';
 
 import FilteringSidePanel from '../SidePanel/FilteringSidePanel';
@@ -37,7 +36,6 @@ const FILTER_MENU = [
 ];
 
 const Filters = ({ title }: { title: string }) => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
     const menuBtnRef = useRef<HTMLButtonElement>(null);
 
     return (
@@ -48,25 +46,11 @@ const Filters = ({ title }: { title: string }) => {
                     <img src={filterIcon} />
                 </button>
                 <div className={styles['dropdown']}>
-                    <button
-                        className={styles['dropdown--btn']}
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                    >
-                        по умолчанию
-                    </button>
-                    <div
-                        className={classNames(styles['dropdown__menu'], {
-                            [styles['dropdown__menu--open']]: dropdownOpen,
-                        })}
-                    >
-                        <ul className={styles['dropdown__list']}>
-                            {DROPDOWN_FILTERS.map((el, index) => (
-                                <li key={index}>
-                                    <button>{el.label}</button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <select className={styles['dropdown--btn']} name="" id="">
+                        {DROPDOWN_FILTERS.map((el, index) => (
+                            <option key={index}>{el.label}</option>
+                        ))}
+                    </select>
                 </div>
             </div>
             <FilteringSidePanel
