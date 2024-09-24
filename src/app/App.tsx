@@ -1,4 +1,4 @@
-import './styles/global.module.css';
+import './styles/index.css';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 

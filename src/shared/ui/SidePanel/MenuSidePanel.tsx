@@ -1,7 +1,8 @@
 import styles from './styles/SidePanel.module.css';
 
+import { Link } from 'react-router-dom';
+
 import SidePanel from './SidePanel';
-import LinkItem from './ui/PanelItems/LinkItem';
 
 type MenuItem = {
     label: string;
@@ -26,7 +27,7 @@ const MenuSidePanel = ({
                     <ul className={styles['menu__list']}>
                         {top.map((el, index) => (
                             <li key={index} className={styles['menu__item']}>
-                                <LinkItem to={el.link}>{el.label}</LinkItem>
+                                <Link to={el.link}>{el.label}</Link>
                             </li>
                         ))}
                     </ul>
@@ -35,7 +36,7 @@ const MenuSidePanel = ({
                     <ul className={styles['menu__list']}>
                         {bottom.map((el, index) => (
                             <li key={index} className={styles['menu__item']}>
-                                <LinkItem to={el.link}>{el.label}</LinkItem>
+                                <Link to={el.link}>{el.label}</Link>
                             </li>
                         ))}
                     </ul>

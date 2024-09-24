@@ -1,9 +1,9 @@
 import manga from '../../../entities/manga/model/mangaModel';
-import axiosInstance from '../../../shared/api';
+import apiInstance from '../../../shared/api';
 
 export async function getFavorites(userId: number): Promise<manga[]> {
     try {
-        const response = await axiosInstance.get(
+        const response = await apiInstance.get(
             `/manga/wishlist?userId=${userId}`
         );
 

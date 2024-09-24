@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 import { getFavorites } from './api';
 
-import Filters from '../../shared/ui/Filters/Filters';
-import ProductPanel from '../../shared/ui/ProductPanel/ProductPanel';
+import Filters from '../../features/productsFilter/ui/Filters';
+import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
 
 const FavoritesPage = () => {
     const [favorites, setFavorites] = useState([]);

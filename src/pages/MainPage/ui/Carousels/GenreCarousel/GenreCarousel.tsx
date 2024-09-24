@@ -7,7 +7,7 @@ import { useRef } from 'react';
 
 import { genre } from '../../../api';
 
-import ProductPanel from '../../../../../shared/ui/ProductPanel/ProductPanel';
+import ProductPanel from '../../../../../entities/product/ui/ProductPanel/ProductPanel';
 
 const GenreCarousel = ({ genre }: { genre: genre }) => {
     const mainRef = useRef(null);

@@ -2,9 +2,9 @@ import styles from './styles/CartPage.module.css';
 
 import { useSelector } from 'react-redux';
 
-import { RootState } from '../../store/store';
+import { RootState } from '../../model/store/store';
 
-import Filters from '../../shared/ui/Filters/Filters';
+import Filters from '../../features/productsFilter/ui/Filters';
 import CartProduct from './ui/CartProduct';
 
 const CartPage = () => {

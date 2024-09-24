@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ShortManga } from '../../../entities/manga/model/mangaModel';
 
-import axiosInstance from '../../../shared/api';
+import apiInstance from '../../../shared/api';
 
 export async function getFeaturedSeries() {
     const test = [
@@ -41,7 +41,7 @@ export async function getFeaturedGenres(): Promise<genre[]> {
     for (let i = 0; i < featuredGenres.length; i++) {
         const genre = featuredGenres[i];
 
-        genre.products = await axiosInstance
+        genre.products = await apiInstance
             .get(`/manga/genre/${genre.title}`)
             .then((res) => res.data);
     }
