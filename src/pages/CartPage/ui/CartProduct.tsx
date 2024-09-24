@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
-import cartProduct from '../../../store/cart/model/cartModels';
+import cartProduct from '../../../model/store/cart/model/cartModels';
 import styles from '../styles/CartProduct.module.css';
 
 import classNames from 'classnames';
-import { deleteProduct, updateProduct } from '../../../store/cart/cartSlice';
-import { BASE_URL } from '../../../shared/api';
+import { deleteProduct, updateProduct } from '../../../model/store/cart/cartSlice';
+import { API_URL } from '../../../shared/config';
 
 const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
                 <div className={styles['product__left']}>
                     <img
                         className={styles['product__img']}
-                        src={BASE_URL + cartProduct.product.imageUrl}
+                        src={API_URL + cartProduct.product.imageUrl}
                         alt=""
                     />
                 </div>

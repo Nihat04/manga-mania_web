@@ -2,7 +2,7 @@ import styles from './styles/ProfilePage.module.css';
 
 import { ReactElement } from 'react';
 
-import Filters from '../../shared/ui/Filters/Filters';
+import Filters from '../../features/productsFilter/ui/Filters';
 import ProfileDropdownTab from './ui/ProfileDropdownTab/ProfileDropdownTab';
 
 type profileTab = {

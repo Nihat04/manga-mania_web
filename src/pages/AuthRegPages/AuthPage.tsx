@@ -3,7 +3,7 @@ import styles from './styles/index.module.css';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { login } from './api/authApi';
+import { login } from '../../entities/user/api';
 
 import loginLogo from './assets/svg/login.svg';
 

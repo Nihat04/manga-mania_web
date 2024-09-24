@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import { getCatalog } from './api/catalogApi';
 import { ShortManga } from '../../entities/manga/model/mangaModel';
 
-import Filters from '../../shared/ui/Filters/Filters';
-import ProductPanel from '../../shared/ui/ProductPanel/ProductPanel';
+import Filters from '../../features/productsFilter/ui/Filters';
+import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
 
 const CatalogPage = () => {
     const [catalog, setCatalog] = useState<ShortManga[]>([]);

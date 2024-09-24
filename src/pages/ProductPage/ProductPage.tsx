@@ -4,10 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { getProduct } from './api/productApi';
-import manga from '../../entities/manga/model/mangaModel';
+import { convertToShort, manga } from '../../entities/product';
 
-import Filters from '../../shared/ui/Filters/Filters';
-import ProductPanel from './ui/ProductPanel/ProductPanel';
+import Filters from '../../features/productsFilter/ui/Filters';
+import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
 
 enum propTypes {
     decription,
@@ -64,7 +64,9 @@ const ProductPage = () => {
             <Filters title="Манга" />
             <section className={styles['product']}>
                 <div className={styles['showcase']}>
-                    {product && <ProductPanel product={product} />}
+                    {product && (
+                        <ProductPanel product={convertToShort(product)} />
+                    )}
                 </div>
                 <Link to="#" className={styles['product__episode']}>
                     Том 3
