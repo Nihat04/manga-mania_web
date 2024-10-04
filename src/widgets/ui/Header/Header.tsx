@@ -1,7 +1,7 @@
 import styles from './styles/Header.module.css';
 
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 import MenuSidePanel from '../../../shared/ui/SidePanel/MenuSidePanel';
@@ -12,17 +12,36 @@ import favoriteIcon from '../../../shared/assets/svg/favorite.svg';
 import cartIcon from '../../../shared/assets/svg/cart.svg';
 import profileIcon from './svg/profile.svg';
 import crossIcon from './svg/cross.svg';
+import favoriteFilledIcon from './svg/favorite-filled.svg';
+import cartFilledIcon from './svg/cart-filled.svg';
+import profileFilledIcon from './svg/profile-filled.svg';
 
 type navLink = {
     label: string;
     icon: string;
+    activeIcon: string;
     path: string;
 };
 
 const NAV_LINKS: navLink[] = [
-    { label: 'избраное', icon: favoriteIcon, path: '/favorites' },
-    { label: 'корзина', icon: cartIcon, path: '/cart' },
-    { label: 'профиль', icon: profileIcon, path: '/profile' },
+    {
+        label: 'избраное',
+        icon: favoriteIcon,
+        activeIcon: favoriteFilledIcon,
+        path: '/favorites',
+    },
+    {
+        label: 'корзина',
+        icon: cartIcon,
+        activeIcon: cartFilledIcon,
+        path: '/cart',
+    },
+    {
+        label: 'профиль',
+        icon: profileIcon,
+        activeIcon: profileFilledIcon,
+        path: '/profile',
+    },
 ];
 
 const MENU = {
@@ -45,11 +64,20 @@ const Header = () => {
     const [searchVisible, setSearchVisible] = useState(false);
     const [search, setSearch] = useState('');
     const menuBtnRef = useRef<HTMLButtonElement>(null);
+    const location = useLocation();
 
     const setSearchBar = (state: boolean) => {
         setTimeout(() => {
             setSearchVisible(state);
         }, 50);
+    };
+
+    const getNavIcon = (nav: navLink) => {
+        if (location.pathname === nav.path) {
+            return nav.activeIcon;
+        }
+
+        return nav.icon;
     };
 
     return (
@@ -91,7 +119,7 @@ const Header = () => {
                             >
                                 <img
                                     className={styles['nav__icon']}
-                                    src={link.icon}
+                                    src={getNavIcon(link)}
                                     alt={link.label}
                                 />
                                 <p className={styles['nav__label']}>

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import user from '../../../entities/user/model/userModel';
+import { getUser } from '../../../shared/api';
 
 interface userState {
     user: user | null;
@@ -7,7 +8,9 @@ interface userState {
 }
 
 const initialState: userState = {
-    user: null,
+    user: await getUser().catch((err) =>
+        err.message === 'anauthorized user' ? null : null
+    ),
     logedIn: false,
 };
 

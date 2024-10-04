@@ -1,0 +1,23 @@
+.item {
+    position: relative;
+    width: 204px;
+    height: 288px;
+    justify-content: center;
+}
+
+.item__img {
+    width: 204px !important;
+    border-radius: 40px;
+}
+
+.item__title {
+    position: absolute;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 900;
+    white-space: nowrap;
+    left: 50%;
+    bottom: 10%;
+    text-shadow: 7px 9px 6px rgba(0, 0, 0, 0.58);
+    transform: translate(-50%, -50%);
+}

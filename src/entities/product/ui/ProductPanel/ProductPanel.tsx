@@ -7,12 +7,17 @@ import { addProduct } from '../../../../model/store/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../../shared/config';
+import { addToWishlist } from '../../../../shared/api';
 
 const ProductPanel = ({ product }: { product: shortManga }) => {
     const dispatch = useDispatch();
 
     const addToCart = () => {
         dispatch(addProduct({ product: product, quantity: 1 }));
+    };
+
+    const wishlistAdd = () => {
+        addToWishlist(product.id);
     };
 
     return (
@@ -23,7 +28,10 @@ const ProductPanel = ({ product }: { product: shortManga }) => {
                     src={API_URL + product.imageUrl}
                 />
             </Link>
-            <button className={styles['favorite-btn']}>
+            <button
+                className={styles['favorite-btn']}
+                onClick={() => wishlistAdd()}
+            >
                 <img className={styles['icon']} src={favoriteIcon} />
             </button>
             <p className={styles['name']}>{product.name}</p>
