@@ -7,6 +7,15 @@
     list-style: none;
 }
 
+.tabs__item {
+    font-size: 20px;
+    color: #000;
+}
+
+.tabs__item a {
+    color: inherit;
+}
+
 .tabs__item:not(:last-child) {
     margin-bottom: 30px;
 }

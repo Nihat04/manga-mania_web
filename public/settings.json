@@ -1,13 +1,13 @@
 {
     "featuredSeries": [
         {
-            "title": "ВОЛЕЙБОЛ!!",
+            "title": "ВОЛЕЙБОЛ",
             "imgUrl": "./img/test/voley.png",
             "linkUrl": "#",
             "color": "#fca717"
         },
         {
-            "title": "синяя тюрьма",
+            "title": "блю лок",
             "imgUrl": "./img/test/blue.png",
             "linkUrl": "#",
             "color": "#018ac0"

@@ -1,39 +1,20 @@
 import 'swiper/css';
-import 'swiper/css/pagination';
-import styles from '../styles/coloredSwiper.module.css';
-import '../styles/paginator.css';
+import styles from '../styles/ImageSwiper.module.css';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import { useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-type element = {
-    title: string;
-    linkUrl: string;
-    imgUrl: string;
-    color: string;
-};
-
-const ColoredSwiper = ({ elements }: { elements: element[] }) => {
+const ImageSwiper = ({
+    elements,
+    bg,
+}: {
+    elements: JSX.Element[];
+    bg: string;
+}) => {
     const screenWidth = document.body.clientWidth;
     const spaceBetween = 50;
     let bgPosition = 0;
     const bgRef = useRef<HTMLDivElement>(null);
-
-    const applyBg = () => {
-        let gradientString = '';
-
-        for (let i = 0; i < elements.length; i++) {
-            gradientString += `, ${elements[i].color} ${calculateSectionSize(i)}%`;
-        }
-
-        return `linear-gradient(90deg${gradientString})`;
-    };
-
-    const calculateSectionSize = (index: number) => {
-        const count = elements.length;
-        return (100 / (count + 1)) * (index + 1);
-    };
 
     const updateBg = (translateValue: number) => {
         const itemWidth = 204;
@@ -76,32 +57,21 @@ const ColoredSwiper = ({ elements }: { elements: element[] }) => {
                 ref={bgRef}
                 className={styles['swiper-background']}
                 style={{
-                    backgroundImage: applyBg(),
-                    backgroundSize: `${elements.length * spaceBetween * 2}% 100%`,
+                    backgroundImage: `url(${bg})`,
                 }}
             ></div>
             <Swiper
                 spaceBetween={spaceBetween}
                 slidesPerView={'auto'}
                 centeredSlides={true}
-                pagination={{ clickable: true }}
                 className={styles['swiper']}
-                modules={[Pagination]}
                 onSliderMove={(swiper) => updateBg(swiper.translate)}
                 onPaginationUpdate={(swiper) => updateBg(swiper.translate)}
                 onUpdate={(swiper) => updateBg(swiper.translate)}
             >
                 {elements.map((el, index) => (
                     <SwiperSlide className={styles['swiper-slide']} key={index}>
-                        <div
-                            key={index}
-                            className={styles['item']}
-                            style={{ backgroundImage: `url(${el.imgUrl})` }}
-                        >
-                            <p className={styles['item__title']}>
-                                {el.title.toUpperCase()}
-                            </p>
-                        </div>
+                        {el}
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -109,4 +79,4 @@ const ColoredSwiper = ({ elements }: { elements: element[] }) => {
     );
 };
 
-export default ColoredSwiper;
+export default ImageSwiper;
