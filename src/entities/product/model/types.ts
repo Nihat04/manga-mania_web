@@ -20,6 +20,7 @@ export type shortManga = {
     id: number;
     name: string;
     price: number;
+    discount: number;
     rating: number;
-    imageUrl: string;
+    imageUrls: string[];
 };

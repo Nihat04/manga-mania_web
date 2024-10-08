@@ -7,9 +7,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 const ImageSwiper = ({
     elements,
     bg,
+    title,
 }: {
     elements: JSX.Element[];
     bg: string;
+    title?: string;
 }) => {
     const screenWidth = document.body.clientWidth;
     const spaceBetween = 50;
@@ -52,14 +54,16 @@ const ImageSwiper = ({
     };
 
     return (
-        <div style={{ position: 'relative' }}>
-            <div
-                ref={bgRef}
-                className={styles['swiper-background']}
-                style={{
-                    backgroundImage: `url(${bg})`,
-                }}
-            ></div>
+        <div
+            className={styles['image-swiper']}
+            ref={bgRef}
+            style={{
+                backgroundImage: `url(${bg})`,
+            }}
+        >
+            {title && (
+                <h2 className={styles['header']}>{title.toUpperCase()}</h2>
+            )}
             <Swiper
                 spaceBetween={spaceBetween}
                 slidesPerView={'auto'}

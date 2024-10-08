@@ -12,9 +12,10 @@ import favoriteIcon from '../../../shared/assets/svg/favorite.svg';
 import cartIcon from '../../../shared/assets/svg/cart.svg';
 import profileIcon from './svg/profile.svg';
 import crossIcon from './svg/cross.svg';
-import favoriteFilledIcon from './svg/favorite-filled.svg';
+import favoriteFilledIcon from '../../../shared/assets/svg/favorite-filled.svg';
 import cartFilledIcon from './svg/cart-filled.svg';
 import profileFilledIcon from './svg/profile-filled.svg';
+import mainLogo from './svg/mainLogo.svg';
 
 type navLink = {
     label: string;
@@ -68,6 +69,12 @@ const Header = () => {
 
     const setSearchBar = (state: boolean) => {
         setTimeout(() => {
+            if (state) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+
             setSearchVisible(state);
         }, 50);
     };
@@ -88,7 +95,11 @@ const Header = () => {
                 })}
             >
                 <Link to={'/'}>
-                    <p className={styles['logo__text']}>Mm</p>
+                    <img
+                        className={styles['logo__img']}
+                        src={mainLogo}
+                        alt="Manga Mania"
+                    />
                 </Link>
             </div>
             <nav className={styles['nav']}>

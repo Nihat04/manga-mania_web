@@ -9,7 +9,7 @@ import CartPage from '../pages/CartPage/CartPage';
 import ProductPage from '../pages/ProductPage/ProductPage';
 import FavoritesPage from '../pages/FavoritesPage/FavoritesPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
-import AuthPage from '../pages/AuthRegPages/AuthPage';
+import { RegPage, AuthPage } from '../pages/AuthRegPages';
 
 type route = {
     path: string;
@@ -28,6 +28,7 @@ function App() {
 
     const independentRoutes: route[] = [
         { path: '/login', element: <AuthPage /> },
+        { path: '/register', element: <RegPage /> },
     ];
 
     return (

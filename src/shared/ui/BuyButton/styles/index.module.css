@@ -1,0 +1,11 @@
+.buy-btn {
+    padding: 5px 31px 5px 13px;
+    font-size: 10px;
+    font-weight: 800;
+    background-color: #e0dbdb;
+    background-image: url('../../../../shared/assets/svg/cart.svg');
+    background-repeat: no-repeat;
+    background-size: 14px;
+    background-position: calc(100% - 7px) center;
+    border-radius: 10px;
+}

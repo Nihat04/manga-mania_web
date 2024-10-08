@@ -1,14 +1,27 @@
+.image-swiper {
+    position: relative;
+    padding: 25px 0 35px 0;
+    background-repeat: no-repeat;
+}
+
+.header {
+    padding-left: 51px;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 900;
+}
+
 /* swiper */
 
 .swiper-background {
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: -1;
 }
 
 .swiper {
-    padding-top: 30px;
-    padding-bottom: 60px;
+    padding-top: 20px;
     width: 100%;
     height: 100%;
 }
@@ -16,15 +29,9 @@
 .swiper-slide {
     display: flex;
     width: 204px;
+    max-height: 280px;
     justify-content: center;
     align-items: center;
-}
-
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 /* item */

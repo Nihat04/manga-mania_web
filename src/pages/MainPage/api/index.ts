@@ -33,5 +33,7 @@ export async function getFeaturedGenres(): Promise<genre[]> {
             .then((res) => res.data);
     }
 
+    console.log(featuredGenres)
+
     return featuredGenres;
 }

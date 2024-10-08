@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { getProduct } from './api/productApi';
-import { convertToShort, manga } from '../../entities/product';
+import { manga } from '../../entities/product';
 
 import Filters from '../../features/productsFilter/ui/Filters';
 import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
@@ -65,11 +65,11 @@ const ProductPage = () => {
             <section className={styles['product']}>
                 <div className={styles['showcase']}>
                     {product && (
-                        <ProductPanel product={convertToShort(product)} />
+                        <ProductPanel product={product} multiImg={true} />
                     )}
                 </div>
                 <Link to="#" className={styles['product__episode']}>
-                    Том 3
+                    {`Том ${product?.volume}`}
                 </Link>
             </section>
             <section className={styles['properties']}>

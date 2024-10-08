@@ -1,0 +1,75 @@
+.product {
+    position: relative;
+    display: flex;
+    padding: 25px 30px;
+    background-color: #f9f9f9;
+    gap: 20px;
+}
+
+.img {
+    width: 104px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.name {
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.discount {
+    display: flex;
+    padding: 10px;
+    width: 130px;
+    flex-direction: column;
+    color: #f9f9f9;
+    background-color: #d30000;
+    border-radius: 35px;
+    transform: rotate(10deg);
+}
+
+.discount__new {
+    font-size: 26px;
+    font-weight: 800;
+    align-self: flex-end;
+}
+
+.discount__old {
+    position: relative;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.discount__old__line {
+    position: absolute;
+    width: 100%;
+    height: calc(100%);
+    top: 0;
+    left: 0;
+    overflow: visible;
+    transform: scale(1.2)
+}
+
+.favorite-btn--wrapper {
+    position: absolute;
+    right: 5%;
+    bottom: 10%;
+}
+
+.favorite-btn {
+    --size: 40px;
+    width: var(--size);
+    height: var(--size);
+}
+
+.icon {
+    margin-top: 4px;
+    width: 70% !important;
+}

@@ -24,15 +24,17 @@ const PopularCategory = () => {
             </div>
             <div className={styles['featured-genres']}>
                 {featuredGenres.map((genre, index) => (
-                    <ImageSwiper
-                        key={index}
-                        bg={genre.bgImgUrl}
-                        elements={genre.products.map((product) => (
-                            <div style={{ backgroundColor: '#ffffff' }}>
-                                <ProductPanel product={product} />
-                            </div>
-                        ))}
-                    />
+                    <div key={index}>
+                        <ImageSwiper
+                            bg={genre.bgImgUrl}
+                            title={genre.title}
+                            elements={genre.products.map((product) => (
+                                <div style={{ backgroundColor: '#ffffff' }}>
+                                    <ProductPanel product={product} />
+                                </div>
+                            ))}
+                        />
+                    </div>
                 ))}
             </div>
         </section>

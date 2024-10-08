@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { getWishlist } from '../../shared/api';
-import { shortManga } from '../../entities/product';
 import { RootState } from '../../model/store/store';
 
 import Filters from '../../features/productsFilter/ui/Filters';
@@ -13,18 +11,16 @@ import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
 import DecisionModal from '../../shared/ui/Modal/types/DecisionModal';
 
 const FavoritesPage = () => {
-    const [favorites, setFavorites] = useState<shortManga[]>([]);
     const [additionalElements, setAdditionalElements] = useState<JSX.Element[]>(
         []
     );
     const user = useSelector((state: RootState) => state.user.user);
+    const wishlist = useSelector((state: RootState) => state.user.wishlist);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user) {
-            if (user.id) {
-                getWishlist(user.id).then((res) => setFavorites(res));
-            }
+        if (user || wishlist) {
+            console.log(wishlist);
         } else {
             setAdditionalElements([
                 ...additionalElements,
@@ -59,11 +55,15 @@ const FavoritesPage = () => {
             </section>
             <section className={styles['favorites']}>
                 <ul className={styles['favorites__list']}>
-                    {favorites.map((el) => (
-                        <li key={el.id} className={styles['favorites__item']}>
-                            <ProductPanel product={el} />
-                        </li>
-                    ))}
+                    {wishlist &&
+                        wishlist.map((el) => (
+                            <li
+                                key={el.id}
+                                className={styles['favorites__item']}
+                            >
+                                <ProductPanel product={el} />
+                            </li>
+                        ))}
                 </ul>
             </section>
             {additionalElements}

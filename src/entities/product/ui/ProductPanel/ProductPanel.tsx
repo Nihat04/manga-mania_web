@@ -1,48 +1,59 @@
 import styles from './styles/ProductPanel.module.css';
 
-import favoriteIcon from '../../../../shared/assets/svg/favorite.svg';
-import { shortManga } from '../../model';
-import { addProduct } from '../../../../model/store/cart/cartSlice';
-
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
 import { API_URL } from '../../../../shared/config';
-import { addToWishlist } from '../../../../shared/api';
+import { manga, shortManga } from '../../model';
 
-const ProductPanel = ({ product }: { product: shortManga }) => {
-    const dispatch = useDispatch();
+import { BuyButton } from '../../../../shared/ui/BuyButton';
 
-    const addToCart = () => {
-        dispatch(addProduct({ product: product, quantity: 1 }));
-    };
+import WishlistButton from '../../../../shared/ui/WishlistButton/WishlistButton';
 
-    const wishlistAdd = () => {
-        addToWishlist(product.id);
+const ProductPanel = ({
+    product,
+    multiImg = false,
+}: {
+    product: shortManga | manga;
+    multiImg?: boolean;
+}) => {
+    const renderImage = () => {
+        if (multiImg) {
+            return (
+                <Swiper>
+                    {product.imageUrls.map((img) => (
+                        <SwiperSlide>
+                            <img
+                                className={styles['img']}
+                                src={API_URL + img}
+                                alt=""
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            );
+        } else {
+            return (
+                <img
+                    className={styles['img']}
+                    src={API_URL + product.imageUrls[0]}
+                />
+            );
+        }
     };
 
     return (
         <div className={styles['product']}>
-            <Link to={`/product/${product.id}`}>
-                <img
-                    className={styles['img']}
-                    src={API_URL + product.imageUrl}
-                />
-            </Link>
-            <button
-                className={styles['favorite-btn']}
-                onClick={() => wishlistAdd()}
-            >
-                <img className={styles['icon']} src={favoriteIcon} />
-            </button>
+            <div className={styles['img--wrapper']}>
+                <Link to={`/product/${product.id}`}>{renderImage()}</Link>
+            </div>
+            <div className={styles['wishlist-btn']}>
+                <WishlistButton productId={product.id} />
+            </div>
             <p className={styles['name']}>{product.name}</p>
             <div className={styles['bottom']}>
                 <p className={styles['price']}>{product.price + '₽'}</p>
-                <button
-                    onClick={() => addToCart()}
-                    className={styles['buy-btn']}
-                >
-                    Купить
-                </button>
+                <BuyButton product={product} />
             </div>
         </div>
     );

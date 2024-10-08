@@ -5,7 +5,7 @@
 .header {
     position: relative;
     display: flex;
-    padding: 14px 30px;
+    padding: 6px 30px;
     margin: 0;
     align-items: center;
     justify-content: space-between;
@@ -14,15 +14,14 @@
 }
 
 .logo {
-    font-size: 1rem;
 }
 
 .logo--hidden {
     visibility: hidden;
 }
 
-.logo__text {
-    color: #000;
+.logo__img {
+    width: 45px;
 }
 
 /* search */

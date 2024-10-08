@@ -1,5 +1,7 @@
 import styles from '../styles/Filters.module.css';
 
+import { useState } from 'react';
+
 import SidePanel from '../../../shared/ui/SidePanel/SidePanel';
 import OptionsItem from './PanelItems/OptionsItem';
 import RangeItem from './PanelItems/RangeItem';
@@ -26,8 +28,14 @@ const FilteringSidePanel = ({
     title: string;
     filters: Filter[];
 }) => {
+    const [open, setOpen] = useState<boolean>(false);
+
     return (
-        <SidePanel btnRef={btnRef} title={title}>
+        <SidePanel
+            btnRef={btnRef}
+            title={title}
+            panelState={{ state: open, setState: setOpen }}
+        >
             <div className="">
                 <ul className={styles['list']}>
                     <RangeItem name="цена" range={{ start: 50, end: 2000 }} />
