@@ -6,28 +6,69 @@ import { getCatalog } from './api/catalogApi';
 import { shortManga } from '../../entities/product';
 
 import Filters from '../../features/productsFilter/ui/Filters';
-import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
+import Catalog from '../../widgets/ui/Catalog/Catalog';
+import { orderItem, filter, filterTypes } from '../../features/productsFilter';
+import { useSearchParams } from 'react-router-dom';
+
+const DROPDOWN_FILTERS: orderItem[] = [
+    { label: 'Популярное', propertyName: 'Popular' },
+    { label: 'Кол-во отзывов', propertyName: 'Reviews' },
+    { label: 'Возрастание цены', propertyName: 'Price' },
+    { label: 'Убыванию цены', propertyName: 'PriceDesc' },
+];
+
+const FILTER_MENU: filter[] = [
+    {
+        label: 'цена',
+        propertyName: 'Price',
+        type: filterTypes.range,
+        range: { min: 0, max: 2000 },
+    },
+    {
+        label: 'год издания',
+        propertyName: 'ReleaseYear',
+        type: filterTypes.range,
+        range: { min: 0, max: 2024 },
+    },
+    {
+        label: 'возраст',
+        propertyName: 'AgeCategory',
+        type: filterTypes.options,
+        options: ['18+', '16+', '12+'],
+    },
+    {
+        label: 'издательство',
+        propertyName: 'publishingHouse',
+        type: filterTypes.options,
+        options: ['Классное', 'Азбука'],
+    },
+    {
+        label: 'переплёт',
+        propertyName: 'coverType',
+        type: filterTypes.options,
+        options: ['твердый', 'мягкий'],
+    },
+];
 
 const CatalogPage = () => {
     const [catalog, setCatalog] = useState<shortManga[]>([]);
+    const [searchParams] = useSearchParams();
 
     useEffect(() => {
-        getCatalog().then((res) => setCatalog(res));
-    }, []);
+        getCatalog(window.location.search).then((res) => setCatalog(res));
+    }, [searchParams]);
 
     return (
         <main className={styles['main']}>
             <section>
-                <Filters title="Манга" />
+                <Filters
+                    title="Манга"
+                    filters={FILTER_MENU}
+                    orderings={DROPDOWN_FILTERS}
+                />
             </section>
             <section className={styles['catalog-section']}>
-                <ul className={styles['catalog__list']}>
-                    {catalog.map((el) => (
-                        <li key={el.id} className={styles['catalog__item']}>
-                            <ProductPanel product={el} />
-                        </li>
-                    ))}
-                </ul>
+                <Catalog products={catalog} />
             </section>
         </main>
     );

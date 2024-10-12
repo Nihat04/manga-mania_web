@@ -16,6 +16,8 @@ import favoriteFilledIcon from '../../../shared/assets/svg/favorite-filled.svg';
 import cartFilledIcon from './svg/cart-filled.svg';
 import profileFilledIcon from './svg/profile-filled.svg';
 import mainLogo from './svg/mainLogo.svg';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../model/store/store';
 
 type navLink = {
     label: string;
@@ -66,6 +68,7 @@ const Header = () => {
     const [search, setSearch] = useState('');
     const menuBtnRef = useRef<HTMLButtonElement>(null);
     const location = useLocation();
+    const cart = useSelector((state: RootState) => state.cart.cart);
 
     const setSearchBar = (state: boolean) => {
         setTimeout(() => {
@@ -137,6 +140,11 @@ const Header = () => {
                                     {link.label}
                                 </p>
                             </Link>
+                            {link.path === '/cart' && (
+                                <div className={styles['cart-counter']}>
+                                    {cart.length}
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>

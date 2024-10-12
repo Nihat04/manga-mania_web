@@ -1,7 +1,6 @@
 export type manga = {
     id: number;
     name: string;
-    imageUrls: string[];
     weight: number;
     pagesNumber: number;
     releaseYear: number;
@@ -14,6 +13,15 @@ export type manga = {
     volume: number;
     source: string;
     discount: number;
+    isNew: boolean;
+    coverType: string;
+    publishingHouse: string;
+    ageCategory: string;
+    reviewsCount: number;
+    ordersIds: number[];
+    rates: number[];
+    usersIdsWhoWish: number[];
+    imageUrls: string[];
 };
 
 export type shortManga = {

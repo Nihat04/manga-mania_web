@@ -6,62 +6,106 @@ import { useEffect, useState } from 'react';
 import { getProduct } from './api/productApi';
 import { manga } from '../../entities/product';
 
-import Filters from '../../features/productsFilter/ui/Filters';
 import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
-
-enum propTypes {
-    decription,
-    characterisitcs,
-    reviews,
-}
+import { PageHeader } from '../../shared/ui';
 
 type prop = {
     title: string;
-    type: propTypes;
+    body: JSX.Element;
 };
 
-const PROPS: prop[] = [
-    {
-        title: 'описание',
-        type: propTypes.decription,
-    },
-    {
-        title: 'характеристика',
-        type: propTypes.characterisitcs,
-    },
-    {
-        title: 'отзывы',
-        type: propTypes.reviews,
-    },
+type characteristic = {
+    propertyName: string;
+    label: string;
+};
+
+const CHARACTERISTICS: characteristic[] = [
+    { propertyName: 'weight', label: 'Вес:' },
+    { propertyName: 'source', label: 'Источник:' },
+    { propertyName: 'publishingHouse', label: 'Издательство:' },
+    { propertyName: 'size', label: 'Размер:' },
+    { propertyName: 'pagesNumber', label: 'Количество страниц:' },
+    { propertyName: 'releaseYear', label: 'Год выпуска:' },
+    { propertyName: 'genreString', label: 'Жанр:' },
+    { propertyName: 'coverType', label: 'Обложка:' },
+    { propertyName: 'authorName', label: 'Автор:' },
 ];
 
 const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState<manga>();
-    const [currentProperty, setCurrentProperty] = useState<prop | null>(null);
+    const [currentProperty, setCurrentProperty] = useState<prop>();
 
-    const renderProperty = (currentProperty: prop) => {
-        switch (currentProperty.type) {
-            case propTypes.decription:
-                return <div>{product?.description}</div>;
-            case propTypes.characterisitcs:
-                return <div></div>;
-            case propTypes.reviews:
-                return <div></div>;
-            default:
-                return <div></div>;
-        }
-    };
+    const properties: prop[] = [
+        {
+            title: 'Описание',
+            body: (
+                <div className={styles['property__info__paragraph']}>
+                    {product?.description}
+                </div>
+            ),
+        },
+        {
+            title: 'Характеристика',
+            body: product ? (
+                <div className="">
+                    <table className={styles['table']}>
+                        <tbody>
+                            {CHARACTERISTICS.map((charac, index) => {
+                                const productCharac =
+                                    product[charac.propertyName];
+
+                                if (!productCharac) return <></>;
+
+                                console.log(productCharac);
+                                return (
+                                    <tr
+                                        className={styles['table__row']}
+                                        key={index}
+                                    >
+                                        <td
+                                            className={
+                                                styles['table__row__section']
+                                            }
+                                        >
+                                            {charac.label}
+                                        </td>
+                                        <td
+                                            className={
+                                                styles['table__row__section']
+                                            }
+                                        >
+                                            {productCharac}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <></>
+            ),
+        },
+        {
+            title: 'Отзывы',
+            body: <div className="">{}</div>,
+        },
+    ];
 
     useEffect(() => {
         if (id) {
-            getProduct(Number(id)).then((res) => setProduct(res));
+            getProduct(Number(id)).then((res) => {
+                setProduct(res);
+                setCurrentProperty(properties[0]);
+            });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     return (
         <main>
-            <Filters title="Манга" />
+            <PageHeader>Манга</PageHeader>
             <section className={styles['product']}>
                 <div className={styles['showcase']}>
                     {product && (
@@ -73,16 +117,21 @@ const ProductPage = () => {
                 </Link>
             </section>
             <section className={styles['properties']}>
-                <ul className={styles['properties__list']}>
-                    {PROPS.map((el, index) => (
+                <ul className={styles['properties__btns']}>
+                    {properties.map((el, index) => (
                         <li key={index} className={styles['properties__item']}>
-                            <button onClick={() => setCurrentProperty(el)}>
+                            <button
+                                className={styles['properties-title--btn']}
+                                onClick={() => setCurrentProperty(el)}
+                            >
                                 {el.title}
                             </button>
                         </li>
                     ))}
                 </ul>
-                {currentProperty && renderProperty(currentProperty)}
+                <div className={styles['properties__info']}>
+                    {currentProperty?.body}
+                </div>
             </section>
             <section className={styles['similar']}>
                 <ul className={styles['similar__list']}></ul>

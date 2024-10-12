@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '../../model/store/store';
 
-import Filters from '../../features/productsFilter/ui/Filters';
 import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
 import DecisionModal from '../../shared/ui/Modal/types/DecisionModal';
+import { PageHeader } from '../../shared/ui';
 
 const FavoritesPage = () => {
     const [additionalElements, setAdditionalElements] = useState<JSX.Element[]>(
@@ -19,9 +19,7 @@ const FavoritesPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user || wishlist) {
-            console.log(wishlist);
-        } else {
+        if (!(user || wishlist)) {
             setAdditionalElements([
                 ...additionalElements,
                 <DecisionModal
@@ -51,7 +49,7 @@ const FavoritesPage = () => {
     return (
         <main>
             <section>
-                <Filters title="Избранное" />
+                <PageHeader>Избранное</PageHeader>
             </section>
             <section className={styles['favorites']}>
                 <ul className={styles['favorites__list']}>

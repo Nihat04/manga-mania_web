@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '../../model/store/store';
 
-import Filters from '../../features/productsFilter/ui/Filters';
 import CartProduct from './ui/CartProduct';
+import { PageHeader } from '../../shared/ui';
 
 const CartPage = () => {
     const cart = useSelector((state: RootState) => state.cart.cart);
@@ -13,7 +13,7 @@ const CartPage = () => {
     return (
         <main>
             <section className={styles['filters-section']}>
-                <Filters title="Корзина" />
+                <PageHeader>Корзина</PageHeader>
             </section>
             <section className={styles['cart-section']}>
                 <ul className={styles['cart__list']}>

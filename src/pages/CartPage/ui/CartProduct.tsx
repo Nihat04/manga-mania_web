@@ -15,7 +15,7 @@ import {
 
 import deleteIcon from '../assets/svg/trashIcon.svg';
 import { AppDispatch } from '../../../model/store/store';
-import WishlistButton from '../../../shared/ui/WishlistButton/WishlistButton';
+import { WishlistButton } from '../../../shared/ui';
 
 const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
     const dispatch = useDispatch<AppDispatch>();

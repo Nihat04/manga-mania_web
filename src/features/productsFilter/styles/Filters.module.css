@@ -82,7 +82,7 @@
     padding-left: 20px;
     flex-direction: column;
     list-style: none;
-    gap: 15px;
+    gap: 20px;
 }
 
 .apply--btn {
@@ -99,13 +99,13 @@
 
 .item__name {
     display: inline-block;
-    /* margin-bottom: 10px; */
     font-size: 20px;
 }
 
 /* Range Item */
 
 .range__input {
+    margin-top: 15px;
     padding: 0 10px;
     max-width: 72px;
     min-height: 30px;

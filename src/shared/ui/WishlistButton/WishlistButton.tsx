@@ -8,7 +8,7 @@ import { addProductToWishlist } from '../../../model/store/user/userSlice';
 import favoriteIcon from '../../assets/svg/favorite.svg';
 import favoriteFilledIcon from '../../assets/svg/favorite-filled.svg';
 
-const WishlistButton = ({ productId }: { productId: number }) => {
+export const WishlistButton = ({ productId }: { productId: number }) => {
     const wishlist = useSelector((state: RootState) => state.user.wishlist);
     const dispatch = useDispatch<AppDispatch>();
 
@@ -33,5 +33,3 @@ const WishlistButton = ({ productId }: { productId: number }) => {
         </button>
     );
 };
-
-export default WishlistButton;

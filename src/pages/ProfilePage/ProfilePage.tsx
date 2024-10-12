@@ -5,9 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../model/store/store';
 
-import Filters from '../../features/productsFilter/ui/Filters';
 import ProfileDropdownTab from './ui/ProfileDropdownTab/ProfileDropdownTab';
 import DecisionModal from '../../shared/ui/Modal/types/DecisionModal';
+import { PageHeader } from '../../shared/ui';
 
 enum tabType {
     link,
@@ -91,7 +91,7 @@ const ProfilePage = () => {
     return (
         <main className={styles['profile']}>
             <section>
-                <Filters title="Профиль" />
+                <PageHeader>Профиль</PageHeader>
             </section>
             <section className={styles['tabs']}>
                 <ul className={styles['tabs__list']}>

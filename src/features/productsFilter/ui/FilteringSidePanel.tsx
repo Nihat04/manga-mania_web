@@ -2,22 +2,12 @@ import styles from '../styles/Filters.module.css';
 
 import { useState } from 'react';
 
+import { filterTypes, filter } from '../model';
+
 import SidePanel from '../../../shared/ui/SidePanel/SidePanel';
 import OptionsItem from './PanelItems/OptionsItem';
 import RangeItem from './PanelItems/RangeItem';
-
-enum FilterType {
-    options,
-    range,
-}
-
-type Filter = {
-    label: string;
-    propertyName: string;
-    type: FilterType;
-    options?: string[];
-    range?: { min: number; max: number };
-};
+import { useSearchParams } from 'react-router-dom';
 
 const FilteringSidePanel = ({
     btnRef,
@@ -26,9 +16,52 @@ const FilteringSidePanel = ({
 }: {
     btnRef: React.RefObject<HTMLButtonElement>;
     title: string;
-    filters: Filter[];
+    filters: filter[];
 }) => {
     const [open, setOpen] = useState<boolean>(false);
+    const [, setSearchParams] = useSearchParams();
+
+    const resetFilters = () => {
+        setSearchParams((params) => {
+            filters.forEach((filter) => {
+                if (filter.type === filterTypes.range) {
+                    params.delete('min' + filter.propertyName);
+                    params.delete('max' + filter.propertyName);
+                }
+
+                params.delete(filter.propertyName);
+            });
+            return params;
+        });
+    };
+
+    const renderFilters = (filter: filter, index?: number): JSX.Element => {
+        switch (+filter.type) {
+            case filterTypes.options:
+                if (!filter.options)
+                    throw new Error('on type options is no options');
+                return (
+                    <OptionsItem
+                        key={index}
+                        label={filter.label}
+                        propertyName={filter.propertyName}
+                        options={filter.options}
+                    />
+                );
+            case filterTypes.range:
+                if (!filter.range) throw new Error('on type range is no range');
+                return (
+                    <RangeItem
+                        key={index}
+                        label={filter.label}
+                        propertyName={filter.propertyName}
+                        range={filter.range}
+                    />
+                );
+            default:
+                throw new Error('unexpected type of filter was given');
+        }
+    };
 
     return (
         <SidePanel
@@ -38,37 +71,20 @@ const FilteringSidePanel = ({
         >
             <div className="">
                 <ul className={styles['list']}>
-                    <RangeItem name="цена" range={{ start: 50, end: 2000 }} />
-                    <OptionsItem
-                        name="возраст"
-                        options={['18+', '16+', '12+']}
-                    />
-                    <OptionsItem
-                        name="год издания"
-                        options={['до 2000', '2000-2020', 'после 2020']}
-                    />
-                    <OptionsItem name="издаительство" options={['Классное']} />
-                    <OptionsItem
-                        name="переплет"
-                        options={['твердый', 'мягкий']}
-                    />
-                    <OptionsItem
-                        name="автор"
-                        options={['Роналду', 'Цой', 'Гермиона']}
-                    />
-                    {filters.map((el) => {
-                        switch (+el.type) {
-                            case FilterType.options:
-                                return (
-                                    <OptionsItem
-                                        name={el.label}
-                                        options={el.options}
-                                    />
-                                );
-                        }
-                    })}
+                    {filters.map((el, index) => renderFilters(el, index))}
                 </ul>
-                <button className={styles['apply--btn']}>применить</button>
+                <button
+                    className={styles['apply--btn']}
+                    onClick={() => setOpen(false)}
+                >
+                    применить
+                </button>
+                <button
+                    className={styles['apply--btn']}
+                    onClick={() => resetFilters()}
+                >
+                    Сбросить
+                </button>
             </div>
         </SidePanel>
     );

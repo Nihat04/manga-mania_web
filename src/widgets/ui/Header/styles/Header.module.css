@@ -121,6 +121,10 @@
     block-size: fit-content;
 }
 
+.nav__item {
+    position: relative;
+}
+
 .nav__link {
     display: flex;
     gap: 5px;
@@ -136,6 +140,19 @@
     color: #000;
     font-size: 1.2rem;
 }
+
+.cart-counter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 5px;
+    font-size: 8px;
+    font-weight: 700;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+/* search menu */
 
 .search-menu {
     position: absolute;

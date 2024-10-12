@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 import { BuyButton } from '../../../../../shared/ui/BuyButton';
 
-import WishlistButton from '../../../../../shared/ui/WishlistButton/WishlistButton';
+import { WishlistButton } from '../../../../../shared/ui';
 
 const DiscountsCategory = () => {
     const [products, setProducts] = useState<shortManga[]>([]);

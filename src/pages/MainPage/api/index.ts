@@ -29,11 +29,9 @@ export async function getFeaturedGenres(): Promise<genre[]> {
         const genre = featuredGenres[i];
 
         genre.products = await apiInstance
-            .get(`/manga/genre/${genre.title}`)
+            .get(`/manga?chars=Genre_${genre.title}`)
             .then((res) => res.data);
     }
-
-    console.log(featuredGenres)
 
     return featuredGenres;
 }
