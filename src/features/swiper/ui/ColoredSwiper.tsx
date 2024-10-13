@@ -17,7 +17,6 @@ type element = {
 const ColoredSwiper = ({ elements }: { elements: element[] }) => {
     const screenWidth = document.body.clientWidth;
     const spaceBetween = 50;
-    let bgPosition = 0;
     const bgRef = useRef<HTMLDivElement>(null);
 
     const applyBg = () => {
@@ -45,7 +44,8 @@ const ColoredSwiper = ({ elements }: { elements: element[] }) => {
         // const secondPosition = visibleSide - itemWidth * 1 - spaceBetween * 0; // -159
         // const thirdPosition = visibleSide - itemWidth * 2 - spaceBetween * 1; // -413.5
 
-        const elementCount = elements.length;
+        // const elementCount = elements.length;
+        const elementCount = 3; // почему то элементы пропадают
 
         const start = visibleSide - itemWidth * 0 - spaceBetween * -1;
         const end =
@@ -57,17 +57,28 @@ const ColoredSwiper = ({ elements }: { elements: element[] }) => {
 
         if (position > 100 || position < 0) return;
 
-        bgRef.current?.animate(
-            [
-                { backgroundPosition: `${bgPosition}% top` },
-                { backgroundPosition: `${position}% top` },
-            ],
-            {
-                duration: 300,
-                fill: 'forwards',
-            }
-        );
-        bgPosition = position;
+        bgRef.current?.animate([{ backgroundPosition: `${position}% top` }], {
+            duration: 300,
+            fill: 'forwards',
+        });
+    };
+
+    const applyStyleListener = (element: HTMLElement) => {
+        const observer = new MutationObserver((mutationList) => {
+            const transformValue = mutationList[0].target.style.transform;
+            const moveValue: string = transformValue
+                .split(',')[0]
+                .split('(')[1]
+                .replace('%', '')
+                .replace('px', '');
+
+            updateBg(Number(moveValue));
+        });
+
+        observer.observe(element, {
+            attributes: true,
+            attributeFilter: ['style'],
+        });
     };
 
     return (
@@ -86,10 +97,8 @@ const ColoredSwiper = ({ elements }: { elements: element[] }) => {
                 centeredSlides={true}
                 pagination={{ clickable: true }}
                 className={styles['swiper']}
+                onSwiper={(swiper) => applyStyleListener(swiper.wrapperEl)}
                 modules={[Pagination]}
-                onSliderMove={(swiper) => updateBg(swiper.translate)}
-                onPaginationUpdate={(swiper) => updateBg(swiper.translate)}
-                onUpdate={(swiper) => updateBg(swiper.translate)}
             >
                 {elements.map((el, index) => (
                     <SwiperSlide className={styles['swiper-slide']} key={index}>

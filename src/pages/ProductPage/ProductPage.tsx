@@ -8,6 +8,7 @@ import { manga } from '../../entities/product';
 
 import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
 import { PageHeader } from '../../shared/ui';
+import classNames from 'classnames';
 
 type prop = {
     title: string;
@@ -34,7 +35,7 @@ const CHARACTERISTICS: characteristic[] = [
 const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState<manga>();
-    const [currentProperty, setCurrentProperty] = useState<prop>();
+    const [currentProperty, setCurrentProperty] = useState<prop | null>(null);
 
     const properties: prop[] = [
         {
@@ -56,8 +57,6 @@ const ProductPage = () => {
                                     product[charac.propertyName];
 
                                 if (!productCharac) return <></>;
-
-                                console.log(productCharac);
                                 return (
                                     <tr
                                         className={styles['table__row']}
@@ -97,7 +96,6 @@ const ProductPage = () => {
         if (id) {
             getProduct(Number(id)).then((res) => {
                 setProduct(res);
-                setCurrentProperty(properties[0]);
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -129,7 +127,11 @@ const ProductPage = () => {
                         </li>
                     ))}
                 </ul>
-                <div className={styles['properties__info']}>
+                <div
+                    className={classNames(styles['properties__info'], {
+                        [styles['properties__info--visible']]: currentProperty,
+                    })}
+                >
                     {currentProperty?.body}
                 </div>
             </section>

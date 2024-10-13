@@ -5,7 +5,8 @@ export function convertToShort(manga: manga): shortManga {
         id: manga.id,
         name: manga.name,
         price: manga.price,
+        discount: manga.discount,
         rating: manga.rating,
-        imageUrl: manga.imageUrls[0],
+        imageUrls: manga.imageUrls,
     };
 }

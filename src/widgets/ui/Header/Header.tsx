@@ -15,7 +15,7 @@ import crossIcon from './svg/cross.svg';
 import favoriteFilledIcon from '../../../shared/assets/svg/favorite-filled.svg';
 import cartFilledIcon from './svg/cart-filled.svg';
 import profileFilledIcon from './svg/profile-filled.svg';
-import mainLogo from './svg/mainLogo.svg';
+import mainLogo from '../../../shared/assets/svg/mainLogo.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../model/store/store';
 

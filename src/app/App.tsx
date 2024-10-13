@@ -11,10 +11,20 @@ import FavoritesPage from '../pages/FavoritesPage/FavoritesPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import { RegPage, AuthPage } from '../pages/AuthRegPages';
 
+import logo from '../shared/assets/svg/mainLogo.svg';
+
 type route = {
     path: string;
     element: JSX.Element;
 };
+
+function isAllowedDevice(): boolean {
+    const clientWidth = document.body.clientWidth;
+
+    if (clientWidth < 560) return true;
+
+    return false;
+}
 
 function App() {
     const publicRoutes: route[] = [
@@ -31,7 +41,7 @@ function App() {
         { path: '/register', element: <RegPage /> },
     ];
 
-    return (
+    return isAllowedDevice() ? (
         <>
             {!independentRoutes.some(
                 (route) => route.path === location.pathname
@@ -54,6 +64,19 @@ function App() {
                 <Route path="*" element={<Navigate to={'/'} replace />} />
             </Routes>
         </>
+    ) : (
+        <div
+            style={{
+                display: 'flex',
+                marginTop: '70px',
+                flexDirection: 'column',
+                alignItems: 'center',
+                fontSize: '20px',
+            }}
+        >
+            <img src={logo} style={{ width: '100px' }} />
+            <p>YOUR DEVICE NOT ALLOWED</p>
+        </div>
     );
 }
 

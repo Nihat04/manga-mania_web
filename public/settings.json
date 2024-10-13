@@ -4,19 +4,22 @@
             "title": "ВОЛЕЙБОЛ",
             "imgUrl": "./img/test/voley.png",
             "linkUrl": "#",
-            "color": "#fca717"
+            "color": "#fca717",
+            "ExampleProductId": 0
         },
         {
             "title": "блю лок",
             "imgUrl": "./img/test/blue.png",
             "linkUrl": "#",
-            "color": "#018ac0"
+            "color": "#018ac0",
+            "ExampleProductId": 0
         },
         {
             "title": "хоримия",
             "imgUrl": "./img/test/hori.png",
             "linkUrl": "#",
-            "color": "#ECA1B1"
+            "color": "#ECA1B1",
+            "ExampleProductId": 0
         }
     ],
     "featuredGenres": [
@@ -28,7 +31,7 @@
         },
         {
             "id": 2,
-            "title": "СПОРТ",
+            "title": "Фэнтези",
             "bgImgUrl": "/img/test/svhool.png",
             "products": []
         }

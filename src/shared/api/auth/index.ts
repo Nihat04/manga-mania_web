@@ -1,14 +1,14 @@
 import apiInstance from '..';
-import { shortManga } from '../../../entities/product';
+import { manga, shortManga } from '../../../entities/product';
 import user from '../../../entities/user/model/userModel';
 
 export async function getUser(): Promise<user> {
     const response = await apiInstance
-        .get('/accounts/profile')
+        .get('/accounts/info')
         .catch((err) => err);
 
     if (response.status === 401) {
-        throw new Error('anauthorized user');
+        throw new Error('unauthorized user');
     }
 
     const data = await response.data;
@@ -30,7 +30,13 @@ export async function getWishlist(userId: number): Promise<shortManga[]> {
     }
 }
 
-export async function addToWishlist(productId: number) {
-    const response = await apiInstance.post(`/manga/wishlist?id=${productId}`);
+export async function addToWishlist(productId: number): Promise<manga> {
+    const response = await apiInstance.post(`/manga/wishlist/${productId}`);
+    const data = await response.data;
+    return data;
+}
+
+export async function deleteFromWishlist(productId: number) {
+    const response = await apiInstance.delete(`/manga/wishlist/${productId}`);
     return response;
 }

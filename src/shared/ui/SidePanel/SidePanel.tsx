@@ -1,5 +1,4 @@
 import styles from './styles/SidePanel.module.css';
-import './styles/body.css';
 
 import { ReactElement, useEffect } from 'react';
 
@@ -23,9 +22,9 @@ const SidePanel = ({
         panelState.setState(state);
 
         if (state) {
-            document.body.classList.add('body--blocked');
+            document.body.style.overflow = 'hidden';
         } else {
-            document.body.classList.remove('body--blocked');
+            document.body.style.overflow = 'auto';
         }
     };
 
@@ -35,8 +34,14 @@ const SidePanel = ({
                 changeOpen(!panelState.state);
             });
         }
+
+        if (panelState.state) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [btnRef]);
+    }, [btnRef, panelState.state]);
 
     return (
         <>

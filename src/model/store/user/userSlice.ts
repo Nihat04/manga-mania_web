@@ -1,20 +1,35 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import user from '../../../entities/user/model/userModel';
-import { getUser, getWishlist, addToWishlist } from '../../../shared/api';
-import { shortManga } from '../../../entities/product';
+import {
+    getUser,
+    getWishlist,
+    addToWishlist,
+    deleteFromWishlist,
+} from '../../../shared/api';
+import { convertToShort, shortManga } from '../../../entities/product';
 
 interface userState {
     user: user | null;
     wishlist: shortManga[] | null;
-    logedIn: boolean;
+    loggedIn: boolean;
 }
 
 let userId = null;
 
 export const addProductToWishlist = createAsyncThunk(
     'user/wishlist/add',
-    async (productId: number) => {
-        await addToWishlist(Number(productId));
+    async (productId: number): Promise<shortManga> => {
+        const addedProduct = await addToWishlist(Number(productId));
+        return convertToShort(addedProduct);
+    }
+);
+
+export const deleteProductFromWishlist = createAsyncThunk(
+    'user/wishlist/delete',
+    async (productId: number): Promise<number | null> => {
+        const response = await deleteFromWishlist(Number(productId));
+        if (response.status === 200) return productId;
+        return null;
     }
 );
 
@@ -24,9 +39,9 @@ const initialState: userState = {
             userId = res?.id;
             return res;
         })
-        .catch((err) => (err.message === 'anauthorized user' ? null : null)),
+        .catch((err) => (err.message === 'unauthorized user' ? null : null)),
     wishlist: userId ? await getWishlist(userId) : null,
-    logedIn: false,
+    loggedIn: false,
 };
 
 const userSlice = createSlice({
@@ -34,13 +49,22 @@ const userSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(addProductToWishlist.fulfilled, (state): void => {
-            if (state && state.user) {
-                getWishlist(state.user?.id).then(
-                    (res) => (state.wishlist = res)
-                );
+        builder.addCase(
+            addProductToWishlist.fulfilled,
+            (state, action): void => {
+                state.wishlist?.push(action.payload);
             }
-        });
+        );
+        builder.addCase(
+            deleteProductFromWishlist.fulfilled,
+            (state, action): void => {
+                if (action.payload && state.wishlist) {
+                    state.wishlist = state.wishlist.filter(
+                        (product) => product.id !== action.payload
+                    );
+                }
+            }
+        );
     },
 });
 

@@ -69,7 +69,7 @@ const FilteringSidePanel = ({
             title={title}
             panelState={{ state: open, setState: setOpen }}
         >
-            <div className="">
+            <div className={styles['side-panel']}>
                 <ul className={styles['list']}>
                     {filters.map((el, index) => renderFilters(el, index))}
                 </ul>

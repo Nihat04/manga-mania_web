@@ -40,13 +40,39 @@ const FILTER_MENU: filter[] = [
         label: 'издательство',
         propertyName: 'publishingHouse',
         type: filterTypes.options,
-        options: ['Классное', 'Азбука'],
+        options: ['XL Media', 'Азбука-Аттикус'],
     },
     {
         label: 'переплёт',
-        propertyName: 'coverType',
+        propertyName: 'Cover',
         type: filterTypes.options,
-        options: ['твердый', 'мягкий'],
+        options: ['Hard', 'Soft'],
+    },
+    {
+        label: 'авторы',
+        propertyName: 'Author',
+        type: filterTypes.options,
+        options: [
+            'Хиро Масима',
+            'Кэн Вакуи',
+            'Кэнтаро Миура',
+            'Цугуми Ооба и Такэси Обата',
+            'Хадзимэ Исаяма',
+        ],
+    },
+    {
+        label: 'жанры',
+        propertyName: 'Genre',
+        type: filterTypes.options,
+        options: [
+            'Боевик',
+            'Драма',
+            'Приключения',
+            'Фэнтези',
+            'Сёнэн',
+            'Трагедия',
+            'Спорт',
+        ],
     },
 ];
 

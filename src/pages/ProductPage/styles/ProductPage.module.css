@@ -35,10 +35,15 @@
 }
 
 .properties__info {
+    display: none;
     margin: 0 25px;
     padding: 20px 15px;
     background-color: #ffffff;
     border-radius: 8px;
+}
+
+.properties__info--visible {
+    display: block;
 }
 
 .property__info__paragraph {
@@ -49,6 +54,8 @@
 
 .table {
     --border-color: #b9b9b9;
+    width: 100%;
+    font-size: 13px;
     border-collapse: separate;
     border-spacing: 0;
     border: 1px solid var(--border-color);

@@ -1,3 +1,8 @@
+.side-panel {
+    height: 100%;
+    overflow-y: auto;
+}
+
 .filters {
     padding: 17px;
     display: flex;
@@ -79,6 +84,7 @@
 
 .list {
     display: flex;
+    margin-bottom: 60px;
     padding-left: 20px;
     flex-direction: column;
     list-style: none;
@@ -86,7 +92,7 @@
 }
 
 .apply--btn {
-    margin-top: 60px;
+    margin-bottom: 30px;
     margin-left: 15px;
     padding: 7px 19px;
     font-size: 20px;
