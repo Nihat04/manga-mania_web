@@ -4,50 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { register as registerApi } from '../../../entities/user/api';
-import { field } from '../model';
 
 import loginLogo from '../assets/svg/login.svg';
 
-const FIELDS: field[] = [
-    {
-        name: 'email',
-        isRequired: true,
-        placeholder: 'Mail',
-        type: 'text',
-    },
-    {
-        name: 'displayName',
-        isRequired: true,
-        placeholder: 'Username',
-        type: 'text',
-    },
-    {
-        name: 'password',
-        isRequired: true,
-        placeholder: 'Password',
-        type: 'password',
-    },
-    {
-        name: 'passwordConfirm',
-        isRequired: true,
-        placeholder: 'Repeat Password',
-        type: 'password',
-    },
-];
+type regData = {
+    email: string;
+    password: string;
+    passwordConfirm: string;
+    displayName: string;
+};
 
 export const RegPage = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const { register, handleSubmit } = useForm<regData>();
     const navigate = useNavigate();
 
-    const regUser = (data: {
-        email: string;
-        password: string;
-        passwordConfirm: string;
-    }) => {
+    const regUser = (data: regData) => {
         if (data.password !== data.passwordConfirm) {
             console.log('Password not the same');
             return;
@@ -66,17 +37,38 @@ export const RegPage = () => {
                     className={styles['form']}
                     onSubmit={handleSubmit(regUser)}
                 >
-                    {FIELDS.map((field, index) => (
-                        <input
-                            key={index}
-                            className={styles['input']}
-                            {...register(field.name, {
-                                required: `Поле ${field.placeholder} обязательно к заполнению`,
-                            })}
-                            type={field.type}
-                            placeholder={field.placeholder}
-                        />
-                    ))}
+                    <input
+                        className={styles['input']}
+                        {...register('email', {
+                            required: `Поле Mail обязательно к заполнению`,
+                        })}
+                        type="text"
+                        placeholder="Mail"
+                    />
+                    <input
+                        className={styles['input']}
+                        {...register('displayName', {
+                            required: `Поле Username обязательно к заполнению`,
+                        })}
+                        type="text"
+                        placeholder="Username"
+                    />
+                    <input
+                        className={styles['input']}
+                        {...register('password', {
+                            required: `Поле Password обязательно к заполнению`,
+                        })}
+                        type="password"
+                        placeholder="Password"
+                    />
+                    <input
+                        className={styles['input']}
+                        {...register('passwordConfirm', {
+                            required: `Поле Repeat Password обязательно к заполнению`,
+                        })}
+                        type="password"
+                        placeholder="Repeat Password"
+                    />
                     <button className={styles['btn']} type="submit">
                         LOGIN
                     </button>

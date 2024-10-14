@@ -1,4 +1,4 @@
-import manga from '../../../entities/manga/model/mangaModel';
+import { manga } from '../../../entities/product';
 import apiInstance from '../../../shared/api';
 
 export async function getProduct(id: number): Promise<manga> {

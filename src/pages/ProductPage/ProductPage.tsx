@@ -52,11 +52,13 @@ const ProductPage = () => {
                 <div className="">
                     <table className={styles['table']}>
                         <tbody>
-                            {CHARACTERISTICS.map((charac, index) => {
-                                const productCharac =
-                                    product[charac.propertyName];
+                            {CHARACTERISTICS.map((characteristic, index) => {
+                                const productCharacteristic =
+                                    product[
+                                        characteristic.propertyName as keyof manga
+                                    ];
 
-                                if (!productCharac) return <></>;
+                                if (!productCharacteristic) return <></>;
                                 return (
                                     <tr
                                         className={styles['table__row']}
@@ -67,14 +69,14 @@ const ProductPage = () => {
                                                 styles['table__row__section']
                                             }
                                         >
-                                            {charac.label}
+                                            {characteristic.label}
                                         </td>
                                         <td
                                             className={
                                                 styles['table__row__section']
                                             }
                                         >
-                                            {productCharac}
+                                            {productCharacteristic}
                                         </td>
                                     </tr>
                                 );
@@ -98,7 +100,6 @@ const ProductPage = () => {
                 setProduct(res);
             });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     return (

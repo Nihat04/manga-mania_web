@@ -65,7 +65,8 @@ const ColoredSwiper = ({ elements }: { elements: element[] }) => {
 
     const applyStyleListener = (element: HTMLElement) => {
         const observer = new MutationObserver((mutationList) => {
-            const transformValue = mutationList[0].target.style.transform;
+            const el = mutationList[0].target as HTMLElement;
+            const transformValue = el.style.transform;
             const moveValue: string = transformValue
                 .split(',')[0]
                 .split('(')[1]
