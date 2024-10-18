@@ -1,0 +1,43 @@
+.actions-panel {
+    display: flex;
+    width: 40%;
+    height: auto;
+}
+
+.actions {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.action {
+    display: flex;
+    padding-top: 50px;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+}
+
+.action-btn {
+    --size: 40px;
+    display: flex;
+    width: var(--size);
+    height: var(--size);
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 100%;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+}
+
+.wishlist-btn {
+    --size: 40px;
+    width: var(--size);
+    height: var(--size);
+
+}
+
+.icon {
+    margin-top: 4px;
+    width: 70% !important;
+}

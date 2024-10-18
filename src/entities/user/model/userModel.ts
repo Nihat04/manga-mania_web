@@ -1,10 +1,24 @@
-type user = {
+export type user = {
+    accountFinancialDetails: null;
+    refreshToken: string;
+    refreshTokenExpiryTime: string;
+    registrationDateTime: string;
+    displayName: string;
+    avatarUrl: null;
+    orders: null;
     id: number;
     userName: string;
-    displayName: string;
-    registrationDateTime: string;
-    rating: number;
-    userComments: [];
+    normalizedUserName: string;
+    email: string;
+    normalizedEmail: string;
+    emailConfirmed: boolean;
+    passwordHash: string;
+    securityStamp: string;
+    concurrencyStamp: string;
+    phoneNumber: null;
+    phoneNumberConfirmed: boolean;
+    twoFactorEnabled: boolean;
+    lockoutEnd: null;
+    lockoutEnabled: boolean;
+    accessFailedCount: number;
 };
-
-export default user;

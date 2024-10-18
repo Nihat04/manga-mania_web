@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import styles from '../styles/index.module.css';
 
 const DecisionModal = ({
@@ -13,7 +14,7 @@ const DecisionModal = ({
             <div className={styles['btns']}>
                 {btns.map((btn, index) => (
                     <button
-                        className={styles['btn']}
+                        className={classNames(styles['btn'], 'btn-da')}
                         key={index}
                         onClick={() => btn.action()}
                     >

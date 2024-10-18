@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { RootState } from '../../model/store/store';
+import { RootState } from '../../features/store/store';
 
 import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
-import DecisionModal from '../../shared/ui/Modal/types/DecisionModal';
+import DecisionModal from '../../features/modal/types/DecisionModal';
 import { PageHeader } from '../../shared/ui';
 
 const FavoritesPage = () => {

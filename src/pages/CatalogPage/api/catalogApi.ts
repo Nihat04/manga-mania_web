@@ -1,7 +1,7 @@
 import { shortManga } from '../../../entities/product/index.ts';
 import apiInstance from '../../../shared/api/index.ts';
 
-export async function getCatalog(linkSearches: string): Promise<shortManga[]> {
+export async function getCatalog(linkSearches?: string): Promise<shortManga[]> {
     const specialSearches = [
         'orderBy',
         'minPrice',

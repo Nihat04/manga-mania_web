@@ -2,6 +2,7 @@ import styles from '../styles/index.module.css';
 
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import classNames from 'classnames';
 
 import { register as registerApi } from '../../../entities/user/api';
 
@@ -69,7 +70,10 @@ export const RegPage = () => {
                         type="password"
                         placeholder="Repeat Password"
                     />
-                    <button className={styles['btn']} type="submit">
+                    <button
+                        className={classNames(styles['btn'], 'btn-da')}
+                        type="submit"
+                    >
                         LOGIN
                     </button>
                 </form>

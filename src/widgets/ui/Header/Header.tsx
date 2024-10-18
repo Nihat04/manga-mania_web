@@ -2,6 +2,8 @@ import styles from './styles/Header.module.css';
 
 import { useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../features/store/store';
 import classNames from 'classnames';
 
 import MenuSidePanel from '../../../shared/ui/SidePanel/MenuSidePanel';
@@ -13,11 +15,9 @@ import cartIcon from '../../../shared/assets/svg/cart.svg';
 import profileIcon from './svg/profile.svg';
 import crossIcon from './svg/cross.svg';
 import favoriteFilledIcon from '../../../shared/assets/svg/favorite-filled.svg';
-import cartFilledIcon from './svg/cart-filled.svg';
+import cartFilledIcon from '../../../shared/assets/svg/cart-filled.svg';
 import profileFilledIcon from './svg/profile-filled.svg';
 import mainLogo from '../../../shared/assets/svg/mainLogo.svg';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../model/store/store';
 
 type navLink = {
     label: string;

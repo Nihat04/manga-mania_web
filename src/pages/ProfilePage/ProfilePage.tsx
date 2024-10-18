@@ -3,10 +3,10 @@ import styles from './styles/ProfilePage.module.css';
 import { ReactElement, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../model/store/store';
+import { RootState } from '../../features/store/store';
 
 import ProfileDropdownTab from './ui/ProfileDropdownTab/ProfileDropdownTab';
-import DecisionModal from '../../shared/ui/Modal/types/DecisionModal';
+import DecisionModal from '../../features/modal/types/DecisionModal';
 import { PageHeader } from '../../shared/ui';
 
 enum tabType {

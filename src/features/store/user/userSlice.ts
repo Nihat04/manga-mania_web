@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import user from '../../../entities/user/model/userModel';
 import {
     getUser,
     getWishlist,
     addToWishlist,
     deleteFromWishlist,
-} from '../../../shared/api';
+    user,
+} from '../../../entities/user';
 import { convertToShort, shortManga } from '../../../entities/product';
 
 interface userState {

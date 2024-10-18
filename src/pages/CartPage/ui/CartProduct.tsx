@@ -6,15 +6,15 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import cartProduct from '../../../model/store/cart/model/cartModels';
+import cartProduct from '../../../features/store/cart/model/cartModels';
 import { API_URL } from '../../../shared/config';
 import {
     deleteProduct,
     updateProduct,
-} from '../../../model/store/cart/cartSlice';
+} from '../../../features/store/cart/cartSlice';
 
-import deleteIcon from '../assets/svg/trashIcon.svg';
-import { AppDispatch } from '../../../model/store/store';
+import deleteIcon from '../../../shared/assets/svg/trashIcon.svg';
+import { AppDispatch } from '../../../features/store/store';
 import { WishlistButton } from '../../../shared/ui';
 
 const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
@@ -68,7 +68,8 @@ const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
                         <button
                             className={classNames(
                                 styles['btn'],
-                                styles['btn__cart']
+                                styles['btn__cart'],
+                                'btn-da'
                             )}
                             onClick={() => console.log(cartProduct)}
                         >
@@ -77,7 +78,10 @@ const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
                         <div className={classNames(styles['counter'])}>
                             <button
                                 onClick={() => changeProductQuantity('-')}
-                                className={styles['counter__btn']}
+                                className={classNames(
+                                    styles['counter__btn'],
+                                    'btn-da'
+                                )}
                             >
                                 -
                             </button>
@@ -86,7 +90,10 @@ const CartProduct = ({ cartProduct }: { cartProduct: cartProduct }) => {
                             </span>
                             <button
                                 onClick={() => changeProductQuantity('+')}
-                                className={styles['counter__btn']}
+                                className={classNames(
+                                    styles['counter__btn'],
+                                    'btn-da'
+                                )}
                             >
                                 +
                             </button>

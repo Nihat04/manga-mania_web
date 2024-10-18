@@ -8,6 +8,7 @@ import SidePanel from '../../../shared/ui/SidePanel/SidePanel';
 import OptionsItem from './PanelItems/OptionsItem';
 import RangeItem from './PanelItems/RangeItem';
 import { useSearchParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 const FilteringSidePanel = ({
     btnRef,
@@ -74,13 +75,13 @@ const FilteringSidePanel = ({
                     {filters.map((el, index) => renderFilters(el, index))}
                 </ul>
                 <button
-                    className={styles['apply--btn']}
+                    className={classNames(styles['apply--btn'], 'btn-da')}
                     onClick={() => setOpen(false)}
                 >
                     применить
                 </button>
                 <button
-                    className={styles['apply--btn']}
+                    className={classNames(styles['apply--btn'], 'btn-da')}
                     onClick={() => resetFilters()}
                 >
                     Сбросить

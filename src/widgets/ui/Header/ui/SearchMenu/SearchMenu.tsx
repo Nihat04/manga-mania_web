@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { search as searchFunc } from './api/searchMenuApi';
-import { RootState } from '../../../../../model/store/store';
-import searchElement from '../../../../../model/store/search/model/searchModel';
+import { RootState } from '../../../../../features/store/store';
+import searchElement from '../../../../../features/store/search/model/searchModel';
 import {
     addSearchHistory,
     deleteSearchHistoryElement,
     deleteSearchHistory,
-} from '../../../../../model/store/search/searchSlice';
+} from '../../../../../features/store/search/searchSlice';
 
 const SearchMenu = ({
     searchString,

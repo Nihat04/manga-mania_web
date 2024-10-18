@@ -1,0 +1,8 @@
+@media (hover: hover) {
+}
+
+@media (hover: none) {
+    .btn-da:active {
+        filter: brightness(90%);
+    }
+}

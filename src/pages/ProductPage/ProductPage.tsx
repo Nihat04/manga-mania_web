@@ -58,7 +58,7 @@ const ProductPage = () => {
                                         characteristic.propertyName as keyof manga
                                     ];
 
-                                if (!productCharacteristic) return <></>;
+                                if (!productCharacteristic) return;
                                 return (
                                     <tr
                                         className={styles['table__row']}

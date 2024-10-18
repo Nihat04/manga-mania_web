@@ -2,7 +2,11 @@ import styles from './styles/PopularCategory.module.css';
 
 import { useEffect, useState } from 'react';
 
-import { genre, getFeaturedGenres, getFeaturedSeries } from '../../../api';
+import {
+    genre,
+    getFeaturedGenres,
+    getFeaturedSeries,
+} from '../../../../../entities/product';
 
 import ColoredSwiper from '../../../../../features/swiper/ui/ColoredSwiper';
 import ImageSwiper from '../../../../../features/swiper/ui/ImageSwiper';
@@ -30,7 +34,10 @@ const PopularCategory = () => {
                             title={genre.title}
                             elements={genre.products.map((product) => (
                                 <div style={{ backgroundColor: '#ffffff' }}>
-                                    <ProductPanel product={product} />
+                                    <ProductPanel
+                                        product={product}
+                                        fixedHeight={275}
+                                    />
                                 </div>
                             ))}
                         />

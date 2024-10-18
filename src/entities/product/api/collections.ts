@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { shortManga } from '../../../entities/product';
+import { genre, shortManga } from '../../../entities/product';
 
 import apiInstance from '../../../shared/api';
 
@@ -11,13 +11,6 @@ export async function getFeaturedSeries() {
 
     return featuredSeries;
 }
-
-export type genre = {
-    id: number;
-    title: string;
-    bgImgUrl: string;
-    products: shortManga[];
-};
 
 export async function getFeaturedGenres(): Promise<genre[]> {
     const featuredGenres: genre[] = await axios
@@ -34,4 +27,12 @@ export async function getFeaturedGenres(): Promise<genre[]> {
     }
 
     return featuredGenres;
+}
+
+export async function getLatestReleases(): Promise<shortManga[]> {
+    const response = await apiInstance.get('manga/new');
+
+    const data = await response.data;
+
+    return data;
 }

@@ -8,6 +8,7 @@ import FilteringSidePanel from './FilteringSidePanel';
 
 import filterIcon from '../assets/svg/filter.svg';
 import { useSearchParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 const Filters = ({
     title,
@@ -32,7 +33,10 @@ const Filters = ({
         <div className={styles['filters']}>
             <h2 className={styles['header']}>{title}</h2>
             <div className={styles['filters-wrapper']}>
-                <button className={styles['menu--btn']} ref={menuBtnRef}>
+                <button
+                    className={classNames(styles['menu--btn'], 'btn-da')}
+                    ref={menuBtnRef}
+                >
                     <img src={filterIcon} />
                 </button>
                 <div className={styles['dropdown']}>

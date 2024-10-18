@@ -2,21 +2,28 @@ import styles from './styles/index.module.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { AppDispatch, RootState } from '../../../model/store/store';
+import { AppDispatch, RootState } from '../../../features/store/store';
 import {
     addProductToWishlist,
     deleteProductFromWishlist,
-} from '../../../model/store/user/userSlice';
-
+} from '../../../features/store/user/userSlice';
 import favoriteIcon from '../../assets/svg/favorite.svg';
 import favoriteFilledIcon from '../../assets/svg/favorite-filled.svg';
 import { useEffect } from 'react';
+import { createNotification } from '../../../features/notifications';
 
 export const WishlistButton = ({ productId }: { productId: number }) => {
     const wishlist = useSelector((state: RootState) => state.user.wishlist);
     const dispatch = useDispatch<AppDispatch>();
 
     const wishlistAction = () => {
+        if (!wishlist) {
+            createNotification({
+                header: 'Ошибка отслеживаемого',
+                bodyText: 'Не удалось сделать операцию',
+            })(dispatch);
+            return;
+        }
         if (isWishlisted()) {
             dispatch(deleteProductFromWishlist(productId));
         } else {

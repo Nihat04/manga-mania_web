@@ -1,6 +1,6 @@
-import apiInstance from '..';
-import { manga, shortManga } from '../../../entities/product';
-import user from '../../../entities/user/model/userModel';
+import apiInstance from '../../../shared/api';
+import { manga, shortManga } from '../../product';
+import { user } from '../model';
 
 export async function getUser(): Promise<user> {
     const response = await apiInstance

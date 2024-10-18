@@ -2,10 +2,13 @@ import styles from '../styles/index.module.css';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import classNames from 'classnames';
 
 import { login } from '../../../entities/user/api';
 
 import loginLogo from '../assets/svg/login.svg';
+import { createNotification } from '../../../features/notifications';
 
 type authData = {
     email: string;
@@ -15,10 +18,16 @@ type authData = {
 export const AuthPage = () => {
     const { register, handleSubmit } = useForm<authData>();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const authorize = (data: authData) => {
         login(data)
             .then(() => navigate(-1))
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                createNotification({
+                    header: 'Ошибка авторизации',
+                    bodyText: err.message,
+                })(dispatch);
+            });
     };
 
     return (
@@ -45,7 +54,10 @@ export const AuthPage = () => {
                         type="password"
                         placeholder="Password"
                     />
-                    <button className={styles['btn']} type="submit">
+                    <button
+                        className={classNames(styles['btn'], 'btn-da')}
+                        type="submit"
+                    >
                         LOGIN
                     </button>
                 </form>

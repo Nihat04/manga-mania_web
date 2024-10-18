@@ -1,6 +1,10 @@
 import './styles/index.css';
+import styles from './styles/index.module.css';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '../features/store/store';
 
 import Header from '../widgets/ui/Header/Header';
 import MainPage from '../pages/MainPage/MainPage';
@@ -9,7 +13,9 @@ import CartPage from '../pages/CartPage/CartPage';
 import ProductPage from '../pages/ProductPage/ProductPage';
 import FavoritesPage from '../pages/FavoritesPage/FavoritesPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
+import WaitingListPage from '../pages/WaitingListPage/WaitingListPage';
 import { RegPage, AuthPage } from '../pages/AuthRegPages';
+import { Notification } from '../features/notifications';
 
 import logo from '../shared/assets/svg/mainLogo.svg';
 
@@ -27,6 +33,10 @@ function isAllowedDevice(): boolean {
 }
 
 function App() {
+    const notifications = useSelector(
+        (state: RootState) => state.screen.notifications
+    );
+
     const publicRoutes: route[] = [
         { path: '/', element: <MainPage /> },
         { path: '/catalog', element: <CatalogPage /> },
@@ -34,6 +44,7 @@ function App() {
         { path: '/product/:id', element: <ProductPage /> },
         { path: '/favorites', element: <FavoritesPage /> },
         { path: '/profile', element: <ProfilePage /> },
+        { path: '/waitinglist', element: <WaitingListPage /> },
     ];
 
     const independentRoutes: route[] = [
@@ -63,6 +74,20 @@ function App() {
                 ))}
                 <Route path="*" element={<Navigate to={'/'} replace />} />
             </Routes>
+            <div className={styles['notifications']}>
+                <ul className={styles['notifications__list']}>
+                    {notifications.map((notification) => (
+                        <li key={notification.id}>
+                            <Notification
+                                header={notification.header}
+                                type={notification.type}
+                            >
+                                {notification.body}
+                            </Notification>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
     ) : (
         <div

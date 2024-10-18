@@ -1,0 +1,59 @@
+.label {
+    position: relative;
+    display: inline-block;
+    padding-right: 25px;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.label::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 16px;
+    aspect-ratio: 1;
+    right: 0;
+    top: 20%;
+    background-image: url('../../../../shared/assets/svg/arrow-down.svg');
+    background-repeat: no-repeat;
+    background-position: right center;
+    transform: rotate(0deg);
+    transition: all 50ms linear;
+}
+
+.menu--open::after {
+    transform: rotate(180deg);
+    transition: all 50ms linear;
+}
+
+.body {
+    margin-top: 10px;
+    list-style: none;
+    transform: scaleY(0);
+    transform-origin: top left;
+    animation: optionsClose 50ms linear forwards;
+}
+.body--visible {
+    display: block;
+    animation: optionsOpen 50ms linear forwards;
+}
+
+@keyframes optionsOpen {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes optionsClose {
+    0% {
+        transform: scaleY(1);
+    }
+    100% {
+        transform: scaleY(0);
+        display: none;
+    }
+}

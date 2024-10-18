@@ -1,14 +1,13 @@
 import styles from './styles/CatalogPage.module.css';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { getCatalog } from './api/catalogApi';
 import { shortManga } from '../../entities/product';
-
 import Filters from '../../features/productsFilter/ui/Filters';
 import Catalog from '../../widgets/ui/Catalog/Catalog';
 import { orderItem, filter, filterTypes } from '../../features/productsFilter';
-import { useSearchParams } from 'react-router-dom';
 
 const DROPDOWN_FILTERS: orderItem[] = [
     { label: 'Популярное', propertyName: 'Popular' },

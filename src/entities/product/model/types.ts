@@ -32,3 +32,10 @@ export type shortManga = {
     rating: number;
     imageUrls: string[];
 };
+
+export type genre = {
+    id: number;
+    title: string;
+    bgImgUrl: string;
+    products: shortManga[];
+};

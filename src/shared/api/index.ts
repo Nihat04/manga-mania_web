@@ -13,4 +13,3 @@ const apiInstance = axios.create({
 });
 
 export default apiInstance;
-export * from './auth/index';
