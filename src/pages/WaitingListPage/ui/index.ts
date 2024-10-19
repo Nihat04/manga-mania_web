@@ -1,1 +1,1 @@
-export * from './WaitingListItem';
+export * from './WaitingListItem/WaitingListItem';
