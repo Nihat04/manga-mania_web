@@ -1,7 +1,7 @@
 import styles from '../styles/index.module.css';
 
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
@@ -17,17 +17,28 @@ type authData = {
 
 export const AuthPage = () => {
     const { register, handleSubmit } = useForm<authData>();
+    const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const authorize = (data: authData) => {
-        login(data)
-            .then(() => navigate(-1))
-            .catch((err) => {
-                createNotification({
-                    header: 'Ошибка авторизации',
-                    bodyText: err.message,
-                })(dispatch);
-            });
+        const nextPage = searchParams.get('next');
+        if (nextPage) location.href = nextPage;
+
+        location.href = '/';
+        // login(data)
+        //     .then(() => {
+        //         const nextPage = searchParams.get('next');
+
+        //         if (nextPage) navigate(nextPage);
+
+        //         navigate('/');
+        //     })
+        //     .catch((err) => {
+        //         createNotification({
+        //             header: 'Ошибка авторизации',
+        //             bodyText: err.message,
+        //         })(dispatch);
+        //     });
     };
 
     return (

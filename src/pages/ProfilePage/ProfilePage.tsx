@@ -52,7 +52,8 @@ const ProfilePage = () => {
                     btns={[
                         {
                             text: 'Войти',
-                            action: () => (window.location.href = './login'),
+                            action: () =>
+                                (location.href = `./login?next=${location.href}`),
                         },
                         {
                             text: 'Отмена',
