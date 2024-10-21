@@ -72,7 +72,6 @@ function App() {
                         element={route.element}
                     />
                 ))}
-                <Route path="*" element={<Navigate to={'/'} replace />} />
             </Routes>
             <div className={styles['notifications']}>
                 <ul className={styles['notifications__list']}>

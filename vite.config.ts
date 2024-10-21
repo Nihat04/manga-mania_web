@@ -6,5 +6,10 @@ export default defineConfig({
     plugins: [react()],
     build: {
         target: 'esnext',
+        rollupOptions: {
+            input: {
+                main: './.htaccess',
+            },
+        },
     },
 });
