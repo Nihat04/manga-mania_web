@@ -1,12 +1,14 @@
 import styles from '../styles/index.module.css';
 
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 
 import { register as registerApi } from '../../../entities/user/api';
 
 import loginLogo from '../assets/svg/login.svg';
+import { createNotification } from '../../../features/notifications';
+import { useDispatch } from 'react-redux';
 
 type regData = {
     email: string;
@@ -17,7 +19,8 @@ type regData = {
 
 export const RegPage = () => {
     const { register, handleSubmit } = useForm<regData>();
-    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const dispatch = useDispatch();
 
     const regUser = (data: regData) => {
         if (data.password !== data.passwordConfirm) {
@@ -26,8 +29,18 @@ export const RegPage = () => {
         }
 
         registerApi(data)
-            .then(() => navigate(-1))
-            .catch((err) => console.log(err));
+            .then(() => {
+                const nextPage = searchParams.get('next');
+
+                if (nextPage) location.href = nextPage;
+                location.href = '/';
+            })
+            .catch((err) => {
+                createNotification({
+                    header: 'Ошибка авторизации',
+                    bodyText: err.message,
+                })(dispatch);
+            });
     };
 
     return (

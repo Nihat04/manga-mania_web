@@ -1,13 +1,13 @@
 import styles from './styles/ProfilePage.module.css';
 
 import { ReactElement, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../features/store/store';
 
-import ProfileDropdownTab from './ui/ProfileDropdownTab/ProfileDropdownTab';
-import DecisionModal from '../../features/modal/types/DecisionModal';
+import { DroppingMenu } from '../../shared/ui/DroppingMenu';
 import { PageHeader } from '../../shared/ui';
+import { UnauthorizedModal } from '../../features/modal';
 
 enum tabType {
     link,
@@ -37,40 +37,14 @@ const TABS: tab[] = [
 
 const ProfilePage = () => {
     const user = useSelector((state: RootState) => state.user.user);
-    const [additionalElements, setAdditionalElements] = useState<JSX.Element[]>(
-        []
-    );
-    const navigate = useNavigate();
+    const [modal, setModal] = useState<JSX.Element>();
 
     useEffect(() => {
         if (user) {
             console.log('Authorized');
         } else {
-            setAdditionalElements([
-                ...additionalElements,
-                <DecisionModal
-                    btns={[
-                        {
-                            text: 'Войти',
-                            action: () =>
-                                (location.href = `./login?next=${location.href}`),
-                        },
-                        {
-                            text: 'Отмена',
-                            action: () => navigate(-1),
-                        },
-                    ]}
-                >
-                    <div>
-                        <p>
-                            Нужно войти, чтобы получить доступ к этой странице
-                        </p>
-                        <p style={{ textAlign: 'center' }}>Войти?</p>
-                    </div>
-                </DecisionModal>,
-            ]);
+            setModal(<UnauthorizedModal />);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     const renderTab = (tab: tab) => {
@@ -82,9 +56,7 @@ const ProfilePage = () => {
                 if (!tab.body)
                     throw new Error('type dropdown doesnt have body');
                 return (
-                    <ProfileDropdownTab title={tab.title}>
-                        {tab.body}
-                    </ProfileDropdownTab>
+                    <DroppingMenu label={tab.title}>{tab.body}</DroppingMenu>
                 );
         }
     };
@@ -103,7 +75,7 @@ const ProfilePage = () => {
                     ))}
                 </ul>
             </section>
-            {additionalElements}
+            {modal}
         </main>
     );
 };

@@ -1,1 +1,2 @@
-export * from './types/DecisionModal';
+export * from './ui';
+export * from './model';

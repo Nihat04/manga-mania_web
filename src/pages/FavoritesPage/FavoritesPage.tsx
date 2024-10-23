@@ -1,50 +1,23 @@
 import styles from './styles/FavoritesPage.module.css';
 
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../../features/store/store';
-
-import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
-import DecisionModal from '../../features/modal/types/DecisionModal';
 import { PageHeader } from '../../shared/ui';
 
+import ProductPanel from '../../entities/product/ui/ProductPanel/ProductPanel';
+import { UnauthorizedModal } from '../../features/modal';
+
 const FavoritesPage = () => {
-    const [additionalElements, setAdditionalElements] = useState<JSX.Element[]>(
-        []
-    );
     const user = useSelector((state: RootState) => state.user.user);
     const wishlist = useSelector((state: RootState) => state.user.wishlist);
-    const navigate = useNavigate();
+    const [modal, setModal] = useState<JSX.Element>();
 
     useEffect(() => {
         if (!(user || wishlist)) {
-            setAdditionalElements([
-                ...additionalElements,
-                <DecisionModal
-                    btns={[
-                        {
-                            text: 'Войти',
-                            action: () =>
-                                (location.href = `./login?next=${location.href}`),
-                        },
-                        {
-                            text: 'Отмена',
-                            action: () => navigate(-1),
-                        },
-                    ]}
-                >
-                    <div>
-                        <p>
-                            Нужно войти, чтобы получить доступ к этой странице
-                        </p>
-                        <p style={{ textAlign: 'center' }}>Войти?</p>
-                    </div>
-                </DecisionModal>,
-            ]);
+            setModal(<UnauthorizedModal />);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, wishlist]);
 
     return (
@@ -65,7 +38,7 @@ const FavoritesPage = () => {
                         ))}
                 </ul>
             </section>
-            {additionalElements}
+            {modal}
         </main>
     );
 };

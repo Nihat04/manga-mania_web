@@ -1,7 +1,7 @@
 import './styles/index.css';
 import styles from './styles/index.module.css';
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../features/store/store';
@@ -16,8 +16,6 @@ import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import WaitingListPage from '../pages/WaitingListPage/WaitingListPage';
 import { RegPage, AuthPage } from '../pages/AuthRegPages';
 import { Notification } from '../features/notifications';
-
-import logo from '../shared/assets/svg/mainLogo.svg';
 
 type route = {
     path: string;
@@ -36,7 +34,6 @@ function App() {
     const notifications = useSelector(
         (state: RootState) => state.screen.notifications
     );
-
     const publicRoutes: route[] = [
         { path: '/', element: <MainPage /> },
         { path: '/catalog', element: <CatalogPage /> },
@@ -98,7 +95,7 @@ function App() {
                 fontSize: '20px',
             }}
         >
-            <img src={logo} style={{ width: '100px' }} />
+            <img src="/mainLogo.svg" style={{ width: '100px' }} />
             <p>YOUR DEVICE NOT ALLOWED</p>
         </div>
     );

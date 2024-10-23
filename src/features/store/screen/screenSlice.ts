@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { notification } from '../../notifications';
 
 interface screenState {
     notifications: notification[];
-    modal: JSX.Element | null;
 }
 
 const initialState: screenState = {
     notifications: [],
-    modal: null,
 };
 
 const ScreenSlice = createSlice({
@@ -23,15 +22,9 @@ const ScreenSlice = createSlice({
                 (notification) => notification.id !== action.payload
             );
         },
-        addModal: (state, action: PayloadAction<JSX.Element>) => {
-            if (state.modal) throw new Error('modal alredy taken');
-
-            state.modal = action.payload;
-        },
     },
 });
 
-export const { addNotification, removeNotification, addModal } =
-    ScreenSlice.actions;
+export const { addNotification, removeNotification } = ScreenSlice.actions;
 
 export default ScreenSlice.reducer;

@@ -13,7 +13,7 @@ export const DroppingMenu = ({
     const [open, setOpen] = useState<boolean>(false);
 
     return (
-        <div>
+        <div className={styles['dropping-menu']}>
             <p
                 className={classNames(styles['label'], {
                     [styles['menu--open']]: open,

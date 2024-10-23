@@ -17,7 +17,6 @@ import crossIcon from './svg/cross.svg';
 import favoriteFilledIcon from '../../../shared/assets/svg/favorite-filled.svg';
 import cartFilledIcon from '../../../shared/assets/svg/cart-filled.svg';
 import profileFilledIcon from './svg/profile-filled.svg';
-import mainLogo from '../../../shared/assets/svg/mainLogo.svg';
 
 type navLink = {
     label: string;
@@ -100,7 +99,7 @@ const Header = () => {
                 <Link to={'/'}>
                     <img
                         className={styles['logo__img']}
-                        src={mainLogo}
+                        src="/mainLogo.svg"
                         alt="Manga Mania"
                     />
                 </Link>

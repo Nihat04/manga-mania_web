@@ -1,13 +1,10 @@
-import classNames from 'classnames';
 import styles from '../styles/index.module.css';
 
-const DecisionModal = ({
-    children,
-    btns,
-}: {
-    children: JSX.Element | string;
-    btns: { text: string; action: () => void }[];
-}) => {
+import classNames from 'classnames';
+
+import { decisionModal } from '../model/types';
+
+export const DecisionModal = ({ children, btns }: decisionModal) => {
     return (
         <div className={styles['modal']}>
             <div className={styles['information']}>{children}</div>
@@ -25,5 +22,3 @@ const DecisionModal = ({
         </div>
     );
 };
-
-export default DecisionModal;

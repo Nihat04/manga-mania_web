@@ -1,3 +1,7 @@
+.dropping-menu {
+    z-index: 40;
+}
+
 .label {
     position: relative;
     display: inline-block;
