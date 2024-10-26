@@ -1,7 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import {
-    getUser,
-    getWishlist,
     addToWishlist,
     deleteFromWishlist,
     user,
@@ -13,8 +11,6 @@ interface userState {
     wishlist: shortManga[] | null;
     loggedIn: boolean;
 }
-
-let userId = null;
 
 export const addProductToWishlist = createAsyncThunk(
     'user/wishlist/add',
@@ -34,20 +30,22 @@ export const deleteProductFromWishlist = createAsyncThunk(
 );
 
 const initialState: userState = {
-    user: await getUser()
-        .then((res) => {
-            userId = res?.id;
-            return res;
-        })
-        .catch((err) => (err.message === 'unauthorized user' ? null : null)),
-    wishlist: userId ? await getWishlist(userId) : null,
+    user: null,
+    wishlist: null,
     loggedIn: false,
 };
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        addUser: (state, action: PayloadAction<user>) => {
+            state.user = action.payload;
+        },
+        addWishlist: (state, action: PayloadAction<shortManga[]>) => {
+            state.wishlist = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(
             addProductToWishlist.fulfilled,
@@ -67,5 +65,7 @@ const userSlice = createSlice({
         );
     },
 });
+
+export const { addUser, addWishlist } = userSlice.actions;
 
 export default userSlice.reducer;

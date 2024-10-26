@@ -2,7 +2,7 @@ import './styles/index.css';
 import styles from './styles/index.module.css';
 
 import { Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../features/store/store';
 
@@ -16,6 +16,9 @@ import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import WaitingListPage from '../pages/WaitingListPage/WaitingListPage';
 import { RegPage, AuthPage } from '../pages/AuthRegPages';
 import { Notification } from '../features/notifications';
+import { useEffect } from 'react';
+import { getUser, getWishlist } from '../entities/user';
+import { addUser } from '../features/store/user/userSlice';
 
 type route = {
     path: string;
@@ -34,6 +37,9 @@ function App() {
     const notifications = useSelector(
         (state: RootState) => state.screen.notifications
     );
+    const user = useSelector((state: RootState) => state.user.user);
+    const dispatch = useDispatch();
+
     const publicRoutes: route[] = [
         { path: '/', element: <MainPage /> },
         { path: '/catalog', element: <CatalogPage /> },
@@ -48,6 +54,18 @@ function App() {
         { path: '/login', element: <AuthPage /> },
         { path: '/register', element: <RegPage /> },
     ];
+
+    useEffect(() => {
+        (async () => {
+            await getUser().then((res) => dispatch(addUser(res)));
+
+            if (user) {
+                await getWishlist(user.id);
+            }
+        })();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return isAllowedDevice() ? (
         <>
