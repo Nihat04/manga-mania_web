@@ -10,9 +10,10 @@ import { Link } from 'react-router-dom';
 import { BuyButton } from '../../../../../shared/ui/BuyButton';
 
 import { WishlistButton } from '../../../../../shared/ui';
+import { TextLoader } from '../../../../../widgets/ui/Loader';
 
 const DiscountsCategory = () => {
-    const [products, setProducts] = useState<shortManga[]>([]);
+    const [products, setProducts] = useState<shortManga[]>();
 
     useEffect(() => {
         getDiscountManga()
@@ -22,7 +23,7 @@ const DiscountsCategory = () => {
 
     return (
         <>
-            {products.map((product) => {
+            {products ? products.map((product) => {
                 return (
                     <div key={product.id} className={styles['product']}>
                         <Link to={`./product/${product.id}`}>
@@ -65,7 +66,7 @@ const DiscountsCategory = () => {
                         </div>
                     </div>
                 );
-            })}
+            }) : <TextLoader />}
         </>
     );
 };

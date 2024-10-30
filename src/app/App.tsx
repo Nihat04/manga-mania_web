@@ -18,7 +18,7 @@ import { RegPage, AuthPage } from '../pages/AuthRegPages';
 import { Notification } from '../features/notifications';
 import { useEffect } from 'react';
 import { getUser, getWishlist } from '../entities/user';
-import { addUser } from '../features/store/user/userSlice';
+import { addUser, addWishlist } from '../features/store/user/userSlice';
 
 type route = {
     path: string;
@@ -37,7 +37,6 @@ function App() {
     const notifications = useSelector(
         (state: RootState) => state.screen.notifications
     );
-    const user = useSelector((state: RootState) => state.user.user);
     const dispatch = useDispatch();
 
     const publicRoutes: route[] = [
@@ -56,13 +55,11 @@ function App() {
     ];
 
     useEffect(() => {
-        (async () => {
-            await getUser().then((res) => dispatch(addUser(res)));
+        getUser().then((res) => {
+            dispatch(addUser(res));
 
-            if (user) {
-                await getWishlist(user.id);
-            }
-        })();
+            getWishlist(res.id).then((res) => dispatch(addWishlist(res)));
+        });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

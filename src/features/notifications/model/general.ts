@@ -23,6 +23,6 @@ export function createNotification({
         dispatch(addNotification(notification));
         setTimeout(() => {
             dispatch(removeNotification(notification.id));
-        }, 2000);
+        }, 5000);
     };
 }

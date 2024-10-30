@@ -8,6 +8,7 @@ import { shortManga } from '../../entities/product';
 import Filters from '../../features/productsFilter/ui/Filters';
 import Catalog from '../../widgets/ui/Catalog/Catalog';
 import { orderItem, filter, filterTypes } from '../../features/productsFilter';
+import { TextLoader } from '../../widgets/ui/Loader';
 
 const DROPDOWN_FILTERS: orderItem[] = [
     { label: 'Популярное', propertyName: 'Popular' },
@@ -76,10 +77,13 @@ const FILTER_MENU: filter[] = [
 ];
 
 const CatalogPage = () => {
-    const [catalog, setCatalog] = useState<shortManga[]>([]);
+    const [catalog, setCatalog] = useState<shortManga[] | null>();
     const [searchParams] = useSearchParams();
 
     useEffect(() => {
+        if(catalog) {
+            setCatalog(null)
+        }
         getCatalog(window.location.search).then((res) => setCatalog(res));
     }, [searchParams]);
 
@@ -93,7 +97,7 @@ const CatalogPage = () => {
                 />
             </section>
             <section className={styles['catalog-section']}>
-                <Catalog products={catalog} />
+                {catalog ? <Catalog products={catalog} /> : <TextLoader />}
             </section>
         </main>
     );

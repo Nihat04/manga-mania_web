@@ -1,14 +1,16 @@
 import styles from '../styles/index.module.css';
 
 import { useForm } from 'react-hook-form';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import classNames from 'classnames';
 
 import { login } from '../../../entities/user/api';
+import { createNotification } from '../../../features/notifications';
+import { SimpleLoader } from '../../../widgets/ui/Loader';
 
 import loginLogo from '../assets/svg/login.svg';
-import { createNotification } from '../../../features/notifications';
 
 type authData = {
     email: string;
@@ -19,8 +21,10 @@ export const AuthPage = () => {
     const { register, handleSubmit } = useForm<authData>();
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
+    const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
 
     const authorize = (data: authData) => {
+        setLoaderVisible(true);
         login(data)
             .then(() => {
                 const nextPage = searchParams.get('next');
@@ -33,7 +37,7 @@ export const AuthPage = () => {
                     header: 'Ошибка авторизации',
                     bodyText: err.message,
                 })(dispatch);
-            });
+            }).finally(() => setLoaderVisible(false));
     };
 
     return (
@@ -67,6 +71,10 @@ export const AuthPage = () => {
                         LOGIN
                     </button>
                 </form>
+                <Link className={styles['bottom-link']} to={'/register'}>Создать аккаунт</Link>
+            </section>
+            <section className={styles['loader']}>
+                {loaderVisible && <SimpleLoader />}
             </section>
         </main>
     );

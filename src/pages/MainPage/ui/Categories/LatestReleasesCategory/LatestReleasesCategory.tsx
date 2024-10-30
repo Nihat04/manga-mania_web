@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { getLatestReleases, shortManga } from '../../../../../entities/product';
 import { CoverflowSwiper } from '../../../../../features/swiper/ui/CoverflowSwiper';
+import { TextLoader } from '../../../../../widgets/ui/Loader';
 
 const LatestReleasesCategory = () => {
-    const [releases, setReleases] = useState<shortManga[]>([]);
+    const [releases, setReleases] = useState<shortManga[]>();
 
     useEffect(() => {
         getLatestReleases().then((res) => setReleases(res));
@@ -12,9 +13,11 @@ const LatestReleasesCategory = () => {
 
     return (
         <section>
-            <CoverflowSwiper products={releases} />
-            <CoverflowSwiper products={releases} />
-            <CoverflowSwiper products={releases} />
+            {releases ? (
+                <CoverflowSwiper products={releases} />
+            ) : (
+                <TextLoader />
+            )}
         </section>
     );
 };

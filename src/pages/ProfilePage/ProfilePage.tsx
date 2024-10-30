@@ -37,11 +37,11 @@ const TABS: tab[] = [
 
 const ProfilePage = () => {
     const user = useSelector((state: RootState) => state.user.user);
-    const [modal, setModal] = useState<JSX.Element>();
+    const [modal, setModal] = useState<JSX.Element | null>();
 
     useEffect(() => {
         if (user) {
-            console.log('Authorized');
+            if(modal) {setModal(null)}
         } else {
             setModal(<UnauthorizedModal />);
         }

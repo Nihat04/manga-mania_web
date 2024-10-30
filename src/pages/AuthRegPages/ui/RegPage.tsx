@@ -1,6 +1,6 @@
 import styles from '../styles/index.module.css';
 
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 
@@ -9,6 +9,8 @@ import { register as registerApi } from '../../../entities/user/api';
 import loginLogo from '../assets/svg/login.svg';
 import { createNotification } from '../../../features/notifications';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { SimpleLoader } from '../../../widgets/ui/Loader';
 
 type regData = {
     email: string;
@@ -21,12 +23,18 @@ export const RegPage = () => {
     const { register, handleSubmit } = useForm<regData>();
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
+    const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
 
     const regUser = (data: regData) => {
         if (data.password !== data.passwordConfirm) {
-            console.log('Password not the same');
+            createNotification({
+                header: 'Ошибка регистрации',
+                bodyText: "Пароли не совпадают",
+            })(dispatch);
             return;
         }
+
+        setLoaderVisible(true);
 
         registerApi(data)
             .then(() => {
@@ -40,7 +48,8 @@ export const RegPage = () => {
                     header: 'Ошибка авторизации',
                     bodyText: err.message,
                 })(dispatch);
-            });
+            })
+            .finally(() => setLoaderVisible(false));
     };
 
     return (
@@ -87,9 +96,13 @@ export const RegPage = () => {
                         className={classNames(styles['btn'], 'btn-da')}
                         type="submit"
                     >
-                        LOGIN
+                        REGISTER
                     </button>
                 </form>
+                <Link className={styles['bottom-link']} to={'/login'}>Войти в аккаунт</Link>
+            </section>
+            <section className={styles['loader']}>
+                {loaderVisible && <SimpleLoader />}
             </section>
         </main>
     );

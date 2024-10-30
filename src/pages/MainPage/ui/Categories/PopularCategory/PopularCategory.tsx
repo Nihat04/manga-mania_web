@@ -11,13 +11,24 @@ import {
 import ColoredSwiper from '../../../../../features/swiper/ui/ColoredSwiper';
 import ImageSwiper from '../../../../../features/swiper/ui/ImageSwiper';
 import ProductPanel from '../../../../../entities/product/ui/ProductPanel/ProductPanel';
+import { TextLoader } from '../../../../../widgets/ui/Loader';
+import { createNotification } from '../../../../../features/notifications';
+import { useDispatch } from 'react-redux';
 
 const PopularCategory = () => {
-    const [featuredGenres, setFeaturedGenres] = useState<genre[]>([]);
+    const [featuredGenres, setFeaturedGenres] = useState<genre[]>();
     const [featuredSeries, setFeaturedSeries] = useState([]);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        getFeaturedGenres().then((res) => setFeaturedGenres(res));
+        getFeaturedGenres()
+            .then((res) => setFeaturedGenres(res))
+            .catch(() =>
+                createNotification({
+                    header: 'Ошибка',
+                    bodyText: 'Не удалось связяться с сервисом',
+                })(dispatch)
+            );
         getFeaturedSeries().then((res) => setFeaturedSeries(res));
     }, []);
 
@@ -27,22 +38,26 @@ const PopularCategory = () => {
                 <ColoredSwiper elements={featuredSeries} />
             </div>
             <div className={styles['featured-genres']}>
-                {featuredGenres.map((genre, index) => (
-                    <div key={index}>
-                        <ImageSwiper
-                            bg={genre.bgImgUrl}
-                            title={genre.title}
-                            elements={genre.products.map((product) => (
-                                <div style={{ backgroundColor: '#ffffff' }}>
-                                    <ProductPanel
-                                        product={product}
-                                        fixedHeight={275}
-                                    />
-                                </div>
-                            ))}
-                        />
-                    </div>
-                ))}
+                {featuredGenres ? (
+                    featuredGenres.map((genre, index) => (
+                        <div key={index}>
+                            <ImageSwiper
+                                bg={genre.bgImgUrl}
+                                title={genre.title}
+                                elements={genre.products.map((product) => (
+                                    <div style={{ backgroundColor: '#ffffff' }}>
+                                        <ProductPanel
+                                            product={product}
+                                            fixedHeight={275}
+                                        />
+                                    </div>
+                                ))}
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <TextLoader />
+                )}
             </div>
         </section>
     );

@@ -17,6 +17,7 @@
 
 .form {
     display: flex;
+    margin-bottom: 30px;
     flex-direction: column;
     gap: 10px;
 }
@@ -35,4 +36,17 @@
     font-weight: 500;
     background-color: #A1A1A1;
     border-radius: 8px;
+}
+
+.bottom-link {
+    color: rgb(79, 126, 126);
+}
+
+/* loader */
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
 }
