@@ -28,6 +28,7 @@ const SearchMenu = ({
         (state: RootState) => state.search.history
     );
     const dispatch = useDispatch();
+    let [timer, setTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
     const goToProduct = (searchEl: searchElement) => {
         navigate(`/product/${searchEl.id}`);
@@ -37,10 +38,15 @@ const SearchMenu = ({
 
     useEffect(() => {
         if (searchString) {
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
+
             setSearchResults([]);
-            setTimeout(() => {
+            setTimer(setTimeout(() => {
                 searchFunc(searchString).then((res) => setSearchResults(res));
-            }, 1000);
+            }, 1000));
         }
     }, [searchString]);
 
