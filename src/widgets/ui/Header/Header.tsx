@@ -65,6 +65,7 @@ const MENU = {
 const Header = () => {
     const [searchVisible, setSearchVisible] = useState(false);
     const [search, setSearch] = useState('');
+    const searchInp = useRef<HTMLInputElement>(null);
     const menuBtnRef = useRef<HTMLButtonElement>(null);
     const location = useLocation();
     const cart = useSelector((state: RootState) => state.cart.cart);
@@ -87,6 +88,13 @@ const Header = () => {
         }
 
         return nav.icon;
+    };
+
+    const eraseSearch = () => {
+        if (searchInp.current) {
+            searchInp.current.focus();
+        }
+        setSearch('');
     };
 
     return (
@@ -154,6 +162,7 @@ const Header = () => {
                         [styles['search-visible']]: searchVisible,
                     })}
                     type="text"
+                    ref={searchInp}
                     onChange={(e) => setSearch(e.target.value)}
                     value={search}
                     onBlur={() => setSearchBar(false)}
@@ -163,7 +172,7 @@ const Header = () => {
                     className={classNames(styles['search__close-btn'], {
                         [styles['search__close-btn--visible']]: searchVisible,
                     })}
-                    onClick={() => setSearch('')}
+                    onClick={() => eraseSearch()}
                 >
                     <img
                         className={styles['search__close-btn__img']}
