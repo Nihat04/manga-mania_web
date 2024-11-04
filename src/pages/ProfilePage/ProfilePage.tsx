@@ -41,7 +41,9 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if (user) {
-            if(modal) {setModal(null)}
+            if (modal) {
+                setModal(null);
+            }
         } else {
             setModal(<UnauthorizedModal />);
         }

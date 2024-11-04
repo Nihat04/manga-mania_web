@@ -13,8 +13,8 @@
 .info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: start;
+    gap: 30px;
 }
 
 .name {
@@ -59,17 +59,7 @@
 
 .favorite-btn--wrapper {
     position: absolute;
+    aspect-ratio: 1;
     right: 5%;
     bottom: 10%;
-}
-
-.favorite-btn {
-    --size: 40px;
-    width: var(--size);
-    height: var(--size);
-}
-
-.icon {
-    margin-top: 4px;
-    width: 70% !important;
 }
