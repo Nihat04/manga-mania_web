@@ -81,8 +81,8 @@ const CatalogPage = () => {
     const [searchParams] = useSearchParams();
 
     useEffect(() => {
-        if(catalog) {
-            setCatalog(null)
+        if (catalog) {
+            setCatalog(null);
         }
         getCatalog(window.location.search).then((res) => setCatalog(res));
     }, [searchParams]);

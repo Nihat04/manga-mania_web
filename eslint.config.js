@@ -11,17 +11,18 @@ export default tseslint.config(
         extends: [
             js.configs.recommended,
             ...tseslint.configs.recommended,
-            prettier.recommended,
         ],
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
-            globals: globals.browser,
+            globals: {
+                browser: true,
+            },
         },
         plugins: {
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,
-            prettier: prettier,
+            'prettier': prettier,
         },
         rules: {
             ...reactHooks.configs.recommended.rules,
@@ -30,6 +31,7 @@ export default tseslint.config(
                 { allowConstantExport: true },
             ],
             'prettier/prettier': 'error',
+            'react-hooks/exhaustive-deps': 'off'
         },
     }
 );

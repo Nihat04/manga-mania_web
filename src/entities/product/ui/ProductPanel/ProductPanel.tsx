@@ -29,7 +29,7 @@ const ProductPanel = ({
                     {product.imageUrls.map((img, index) => (
                         <SwiperSlide key={index}>
                             <img
-                                className={styles['img']}
+                                className={styles['product__link-img']}
                                 src={API_URL + img}
                                 alt=""
                             />
@@ -40,7 +40,7 @@ const ProductPanel = ({
         } else {
             return (
                 <img
-                    className={styles['img']}
+                    className={styles['product__link-img']}
                     src={API_URL + product.imageUrls[0]}
                     style={{ height: fixedHeight ? fixedHeight - 86 : '100%' }}
                 />
@@ -53,15 +53,15 @@ const ProductPanel = ({
             className={styles['product']}
             style={{ height: fixedHeight || '100%' }}
         >
-            <Link className={styles['img--link']} to={`/product/${product.id}`}>
+            <Link className={styles['product__link']} to={`/product/${product.id}`}>
                 {renderImage()}
             </Link>
-            <div className={styles['wishlist-btn']}>
+            <div className={styles['product__wishlist-btn']}>
                 <WishlistButton productId={product.id} />
             </div>
-            <p className={styles['name']}>{product.name}</p>
-            <div className={styles['bottom']}>
-                <p className={styles['price']}>{product.price + '₽'}</p>
+            <p className={styles['product__name']}>{product.name}</p>
+            <div className={styles['product__bottom']}>
+                <p className={styles['product__bottom-price']}>{product.price + '₽'}</p>
                 <BuyButton product={product} />
             </div>
         </div>

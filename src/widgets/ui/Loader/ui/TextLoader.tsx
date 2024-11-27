@@ -86,7 +86,7 @@ export const TextLoader = () => {
                     viewBox="0 0 13 18"
                     height="18"
                     width="13"
-                    className={styles["letter"]}
+                    className={styles['letter']}
                 >
                     <path
                         fill="black"
@@ -94,14 +94,14 @@ export const TextLoader = () => {
                     ></path>
                 </svg>
             </span>
-            <span className={styles["g"]}>
+            <span className={styles['g']}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 15 18"
                     height="18"
                     width="15"
-                    className={styles["letter"]}
+                    className={styles['letter']}
                 >
                     <path
                         fill="black"

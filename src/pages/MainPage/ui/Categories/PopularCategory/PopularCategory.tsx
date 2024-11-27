@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 const PopularCategory = () => {
     const [featuredGenres, setFeaturedGenres] = useState<genre[]>();
     const [featuredSeries, setFeaturedSeries] = useState([]);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
         getFeaturedGenres()

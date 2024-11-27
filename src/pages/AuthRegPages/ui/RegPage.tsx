@@ -29,7 +29,7 @@ export const RegPage = () => {
         if (data.password !== data.passwordConfirm) {
             createNotification({
                 header: 'Ошибка регистрации',
-                bodyText: "Пароли не совпадают",
+                bodyText: 'Пароли не совпадают',
             })(dispatch);
             return;
         }
@@ -99,7 +99,9 @@ export const RegPage = () => {
                         REGISTER
                     </button>
                 </form>
-                <Link className={styles['bottom-link']} to={'/login'}>Войти в аккаунт</Link>
+                <Link className={styles['bottom-link']} to={'/login'}>
+                    Войти в аккаунт
+                </Link>
             </section>
             <section className={styles['loader']}>
                 {loaderVisible && <SimpleLoader />}

@@ -19,8 +19,10 @@ export const Notification = ({
 
     return (
         <div className={classNames(styles['notification'], specifyType())}>
-            {header && <p className={styles['header']}>{header}</p>}
-            <div className={styles['text']}>{children}</div>
+            {header && (
+                <p className={styles['notification__header']}>{header}</p>
+            )}
+            <div className={styles['notification__text']}>{children}</div>
         </div>
     );
 };

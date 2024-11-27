@@ -88,7 +88,10 @@ function App() {
             <div className={styles['notifications']}>
                 <ul className={styles['notifications__list']}>
                     {notifications.map((notification) => (
-                        <li key={notification.id}>
+                        <li
+                            className={styles['notifications__list-item']}
+                            key={notification.id}
+                        >
                             <Notification
                                 header={notification.header}
                                 type={notification.type}

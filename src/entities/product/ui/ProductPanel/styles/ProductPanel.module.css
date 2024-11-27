@@ -6,18 +6,18 @@
     justify-content: end;
 }
 
-.img--link {
+.product__link {
     display: flex;
     margin-bottom: 5px;
 }
 
-.img {
+.product__link-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.wishlist-btn {
+.product__wishlist-btn {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -26,7 +26,7 @@
     z-index: 100;
 }
 
-.name {
+.product__name {
     display: -webkit-box;
     margin-bottom: 10px;
     height: 30px;
@@ -37,14 +37,14 @@
     overflow: hidden;
 }
 
-.bottom {
+.product__bottom {
     display: flex;
     height: 22px;
     justify-content: space-between;
     align-items: center;
 }
 
-.price {
+.product__bottom-price {
     font-size: 15px;
     font-weight: 600;
 }

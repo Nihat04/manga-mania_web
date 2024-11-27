@@ -37,7 +37,8 @@ export const AuthPage = () => {
                     header: 'Ошибка авторизации',
                     bodyText: err.message,
                 })(dispatch);
-            }).finally(() => setLoaderVisible(false));
+            })
+            .finally(() => setLoaderVisible(false));
     };
 
     return (
@@ -71,7 +72,9 @@ export const AuthPage = () => {
                         LOGIN
                     </button>
                 </form>
-                <Link className={styles['bottom-link']} to={'/register'}>Создать аккаунт</Link>
+                <Link className={styles['bottom-link']} to={'/register'}>
+                    Создать аккаунт
+                </Link>
             </section>
             <section className={styles['loader']}>
                 {loaderVisible && <SimpleLoader />}
